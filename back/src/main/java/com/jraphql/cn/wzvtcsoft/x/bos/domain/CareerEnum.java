@@ -1,7 +1,7 @@
 package com.jraphql.cn.wzvtcsoft.x.bos.domain;
 
-public interface TafsEnum {
-    TafsEnum.EnumInnerValue getEnumInnerValue();
+public interface CareerEnum {
+    CareerEnum.EnumInnerValue getEnumInnerValue();
 
     @Deprecated
     default String getDescription() {

@@ -1,9 +1,9 @@
 package com.jraphql;
 
-import com.jraphql.cn.wzvtcsoft.x.bos.domain.TafsEnum;
+import com.jraphql.cn.wzvtcsoft.x.bos.domain.CareerEnum;
 
 @SchemaDocumentation("Query filter operations types")
-enum QueryFilterOperator implements TafsEnum {
+enum QueryFilterOperator implements CareerEnum {
     ISNULL("ISNULL", "is null"),
     ISNOTNULL("ISNOTNULL", "is not null"),
     GREATTHAN("greaterThan", "greater than"),
@@ -17,10 +17,10 @@ enum QueryFilterOperator implements TafsEnum {
     NOT("NOT", "not"),
     LIKE("LIKE", "like");
 
-    private TafsEnum.EnumInnerValue ev = null;
+    private CareerEnum.EnumInnerValue ev = null;
 
     QueryFilterOperator(String value, String name) {
-        this.ev = new TafsEnum.EnumInnerValue(value, name);
+        this.ev = new CareerEnum.EnumInnerValue(value, name);
     }
 
     @Override
@@ -32,19 +32,19 @@ enum QueryFilterOperator implements TafsEnum {
 //TODO May need to be extended or more normalized
 
 @SchemaDocumentation("Query expression composition operator")
-enum QueryFilterCombinator implements TafsEnum {
+enum QueryFilterCombinator implements CareerEnum {
     AND("AND", "and"),
     OR("OR", "or"),
     NOT("NOT", "!");
 
-    private TafsEnum.EnumInnerValue ev = null;
+    private CareerEnum.EnumInnerValue ev = null;
 
     QueryFilterCombinator(String value, String name) {
-        this.ev = new TafsEnum.EnumInnerValue(value, name);
+        this.ev = new CareerEnum.EnumInnerValue(value, name);
     }
 
     @Override
-    public TafsEnum.EnumInnerValue getEnumInnerValue() {
+    public CareerEnum.EnumInnerValue getEnumInnerValue() {
         return this.ev;
     }
 }
