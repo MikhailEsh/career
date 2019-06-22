@@ -1,0 +1,11 @@
+${AnsiColor.CYAN}    ___      .       _____   _____   _____  _____
+${AnsiColor.CYAN}   /        / \     |       |       |      |
+${AnsiColor.CYAN}  |        /   \    |       |       |      |
+${AnsiColor.CYAN}  |       /-----\   |       |-----  |----- |
+${AnsiColor.CYAN}  |      /       \  |       |       |      |
+${AnsiColor.CYAN}   \___ /         \ |       |_____  |_____ |
+${AnsiColor.CYAN}
+
+${AnsiColor.GREEN}Spring Boot Version : ${spring-boot.version} ${spring-boot.formatted-version}
+${AnsiColor.BRIGHT_CYAN}SpringBoot-Vue.js   : 0.0.1.RELEASE
+

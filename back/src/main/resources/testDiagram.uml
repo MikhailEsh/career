@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>JAVA</ID>
+  <OriginalElement />
+  <nodes>
+    <node x="312.0" y="449.0">com.tafs.entities.refs.BaseEntity</node>
+    <node x="0.0" y="523.0">com.tafs.services.cache.CacheSrv</node>
+    <node x="0.0" y="301.0">com.tafs.services.dashboards.AlgorithmResult</node>
+    <node x="179.0" y="301.0">com.tafs.services.cache.BaseOldStoreSrv</node>
+    <node x="215.0" y="0.0">com.tafs.services.dashboards.BuilderRefDashboardSrv</node>
+    <node x="0.0" y="449.0">com.tafs.services.dashboards.IncidentsSrv</node>
+    <node x="198.0" y="227.0">com.tafs.services.incidents.IncidentWrapperSrv</node>
+    <node x="0.0" y="375.0">com.tafs.services.dashboards.BuilderExcelSrv</node>
+    <node x="0.0" y="153.0">com.tafs.services.developer.IncidentGeneratorSrv</node>
+    <node x="358.0" y="301.0">com.tafs.services.dashboards.BuilderWordSrv</node>
+    <node x="12.0" y="0.0">com.tafs.dao.refbase.BaseRepoDynamic</node>
+    <node x="395.0" y="227.0">com.tafs.services.cache.BaseNewStoreSrv</node>
+    <node x="0.0" y="79.0">com.tafs.dao.refbase.BaseRepoDynamicImpl</node>
+    <node x="157.0" y="449.0">com.tafs.entities.ui.refs.IncidentDto</node>
+    <node x="338.0" y="375.0">com.tafs.services.cache.CacheNames</node>
+    <node x="0.0" y="227.0">com.tafs.services.cache.IncidentFullStoreSrv</node>
+    <node x="204.0" y="153.0">com.tafs.services.dashboards.BuilderDashboardSrv</node>
+    <node x="172.0" y="375.0">com.tafs.entities.refs.BaseOldEntity</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="com.tafs.dao.refbase.BaseRepoDynamicImpl" target="com.tafs.dao.refbase.BaseRepoDynamic">
+      <point x="0.0" y="-14.5" />
+      <point x="0.0" y="14.5" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic Group" zoom="0.8" x="500.0" y="244.25" />
+  <SelectedNodes />
+  <Categories />
+  <SCOPE>All</SCOPE>
+  <VISIBILITY>private</VISIBILITY>
+</Diagram>
+
