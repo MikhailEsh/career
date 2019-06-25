@@ -1,0 +1,16 @@
+{
+  "compilerOptions": {
+    "target": "ES6",
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "allowSyntheticDefaultImports": true,
+    "baseUrl": "./",
+    "paths": {
+      "components/*": ["src/components/*"],
+      "services/*": ["src/services/*"],
+      "constants/*": ["src/constants/*"],
+      "@career/*": ["src/*"]
+    }
+  },
+  "exclude": ["node_modules"]
+}
