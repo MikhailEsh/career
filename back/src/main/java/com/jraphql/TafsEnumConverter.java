@@ -1,12 +1,12 @@
 package com.jraphql;
 
-import com.jraphql.cn.wzvtcsoft.x.bos.domain.TafsEnum;
+import com.jraphql.cn.wzvtcsoft.x.bos.domain.CareerEnum;
 
 import javax.persistence.AttributeConverter;
 import java.lang.reflect.ParameterizedType;
 import java.util.Arrays;
 
-public abstract class TafsEnumConverter<T extends TafsEnum> implements AttributeConverter<T, String> {
+public abstract class TafsEnumConverter<T extends CareerEnum> implements AttributeConverter<T, String> {
     private Class<T> type;
 
     public TafsEnumConverter() {
@@ -25,7 +25,7 @@ public abstract class TafsEnumConverter<T extends TafsEnum> implements Attribute
         if (dbData == null) {
             return null;
         } else {
-            return Arrays.stream(((Class<TafsEnum>) type).getEnumConstants()).filter(
+            return Arrays.stream(((Class<CareerEnum>) type).getEnumConstants()).filter(
                     enumValue -> enumValue.getValue().equals(dbData))
                     .map(enumValue -> ((T) enumValue))
                     .findFirst()

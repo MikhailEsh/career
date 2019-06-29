@@ -1,6 +1,6 @@
 package com.jraphql;
 
-import com.jraphql.cn.wzvtcsoft.x.bos.domain.TafsEnum;
+import com.jraphql.cn.wzvtcsoft.x.bos.domain.CareerEnum;
 import graphql.language.*;
 import graphql.schema.*;
 import org.springframework.beans.ConfigurablePropertyAccessor;
@@ -372,8 +372,8 @@ public class JpaDataFetcher implements DataFetcher {
             return new Timestamp(Long.parseLong(v));
         } else if (javaType == UUID.class) {
             return UUID.fromString(v.replaceAll("'", ""));
-        } else if (TafsEnum.class.isAssignableFrom(javaType)) {
-            return Arrays.stream((TafsEnum[]) javaType.getEnumConstants()).filter(bosEnum -> bosEnum.getValue().equals(v)).findFirst()
+        } else if (CareerEnum.class.isAssignableFrom(javaType)) {
+            return Arrays.stream((CareerEnum[]) javaType.getEnumConstants()).filter(bosEnum -> bosEnum.getValue().equals(v)).findFirst()
                     .orElse(null);
         }
 
@@ -549,7 +549,7 @@ public class JpaDataFetcher implements DataFetcher {
             });
             return set;
         } else if (graphQLInputType instanceof GraphQLEnumType) {//enum
-            if (value instanceof TafsEnum) {
+            if (value instanceof CareerEnum) {
                 return value;
             } else if (value instanceof EnumValue) {
                 return this.graphQlTypeMapper.getBosEnumByValue((GraphQLEnumType) graphQLInputType, ((EnumValue) value).getName());

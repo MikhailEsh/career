@@ -1,7 +1,7 @@
 package com.jraphql;
 
 import com.jraphql.cn.wzvtcsoft.x.bos.domain.GQLEntity;
-import com.jraphql.cn.wzvtcsoft.x.bos.domain.TafsEnum;
+import com.jraphql.cn.wzvtcsoft.x.bos.domain.CareerEnum;
 import com.jraphql.cn.wzvtcsoft.x.bos.domain.util.BosUtils;
 import graphql.Scalars;
 import graphql.schema.*;
@@ -55,7 +55,7 @@ public class GraphQLSchemaBuilder extends GraphQLSchema.Builder implements IGrap
     private final EntityManager entityManager;
     private final Map<Method, Object> methodTargetMap = new HashMap<>();
     private final Map<Class, GraphQLScalarType> classGraphQlScalarTypeMap = new HashMap<>();
-    private final Map<Class<? extends TafsEnum>, GraphQLEnumType> enumClassGraphQlEnumTypeMap = new HashMap<>();
+    private final Map<Class<? extends CareerEnum>, GraphQLEnumType> enumClassGraphQlEnumTypeMap = new HashMap<>();
     // All JPA Entity, Embeddable corresponding GraphQLType, including GraphQLOutputObjectType and GraphQLInputObjectType two types, but also only the two types
     private final Map<GraphQLType, ManagedType> graphQlTypeManagedTypeClassMap = new HashMap<>();
     //The common non-entity class to use for input.
@@ -117,7 +117,7 @@ public class GraphQLSchemaBuilder extends GraphQLSchema.Builder implements IGrap
         return null;
     }
 
-    private static GraphQLEnumType getGraphQLEnumType(Class<? extends TafsEnum> bosEnumClass) {
+    private static GraphQLEnumType getGraphQLEnumType(Class<? extends CareerEnum> bosEnumClass) {
         return new GraphQLEnumType(bosEnumClass.getSimpleName(), getSchemaDocumentation(bosEnumClass), Arrays.stream(bosEnumClass.getEnumConstants())
                 .map(qfo -> new GraphQLEnumValueDefinition(qfo.getValue(), qfo.getAlias(), qfo.getValue()))
                 .collect(Collectors.toList()));
@@ -293,8 +293,8 @@ public class GraphQLSchemaBuilder extends GraphQLSchema.Builder implements IGrap
     }
 
     @Override
-    public TafsEnum getBosEnumByValue(GraphQLEnumType bosEnumType, String enumValue) {
-        Class<? extends TafsEnum> enumType = this.getClazzByInputType(bosEnumType);
+    public CareerEnum getBosEnumByValue(GraphQLEnumType bosEnumType, String enumValue) {
+        Class<? extends CareerEnum> enumType = this.getClazzByInputType(bosEnumType);
         return Arrays.stream(enumType.getEnumConstants()).filter(bosEnum -> bosEnum.getValue().equals(enumValue)).findFirst()
                 .orElse(null);
     }
@@ -374,9 +374,9 @@ public class GraphQLSchemaBuilder extends GraphQLSchema.Builder implements IGrap
         return Optional.ofNullable((GraphQLInputType) this.classGraphQlScalarTypeMap.get(javaType))
                 .orElseGet(() -> Optional.ofNullable(this.enumClassGraphQlEnumTypeMap.get(javaType))
                         .orElseGet(() -> {
-                            if (javaType.isEnum() && (TafsEnum.class.isAssignableFrom(javaType))) {
+                            if (javaType.isEnum() && (CareerEnum.class.isAssignableFrom(javaType))) {
                                 GraphQLEnumType gt = getGraphQLEnumType(javaType);
-                                this.enumClassGraphQlEnumTypeMap.put((Class<TafsEnum>) javaType, gt);
+                                this.enumClassGraphQlEnumTypeMap.put((Class<CareerEnum>) javaType, gt);
                                 return gt;
                             } else {
                                 return null;

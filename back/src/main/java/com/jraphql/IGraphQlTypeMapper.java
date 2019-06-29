@@ -1,6 +1,6 @@
 package com.jraphql;
 
-import com.jraphql.cn.wzvtcsoft.x.bos.domain.TafsEnum;
+import com.jraphql.cn.wzvtcsoft.x.bos.domain.CareerEnum;
 import graphql.schema.GraphQLEnumType;
 import graphql.schema.GraphQLInputType;
 import graphql.schema.GraphQLOutputType;
@@ -31,5 +31,5 @@ interface IGraphQlTypeMapper {
     String getGraphQLTypeNameOfEntityList(EntityType entityType);
 
     //TODO 似乎要抛异常！
-    TafsEnum getBosEnumByValue(GraphQLEnumType bosEnumType, String enumValue);
+    CareerEnum getBosEnumByValue(GraphQLEnumType bosEnumType, String enumValue);
 }

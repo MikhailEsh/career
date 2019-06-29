@@ -1,16 +1,16 @@
 package com.jraphql;
 
-import com.jraphql.cn.wzvtcsoft.x.bos.domain.TafsEnum;
+import com.jraphql.cn.wzvtcsoft.x.bos.domain.CareerEnum;
 
 import javax.persistence.Converter;
 
 @SchemaDocumentation("测试是否为空")
-public enum FieldNullEnum implements TafsEnum {
+public enum FieldNullEnum implements CareerEnum {
 
     ISNULL("ISNULL", "为空"), NOTNULL("NOTNULL", "不为空");
 
     FieldNullEnum(String value, String name) {
-        this.ev = new TafsEnum.EnumInnerValue(value, name);
+        this.ev = new CareerEnum.EnumInnerValue(value, name);
     }
 
     private EnumInnerValue ev = null;
