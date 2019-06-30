@@ -30,7 +30,7 @@ public class ReviewEntity {
     Integer career;
     @Column(name = "balance_scale")
     Integer balanceWorkHome;
-    @Column(name = "recomend")
+    @Column(name = "recommend")
     RecommendEnum recommend;
     @Column(name = "plus")
     String plus;
@@ -46,7 +46,7 @@ public class ReviewEntity {
     Integer useful;
     @Column(name = "user")
     UUID user;
-    @Column(name = "approve")
+    @Column(name = "approved")
     Boolean approved;
     @Column(name = "company")
     UUID company;

@@ -1,5 +1,6 @@
 package com.career.entities;
 
+import com.career.dto.enumDto.RecommendEnum;
 import com.career.dto.enumDto.TestsEnum;
 import com.career.dto.enumDto.TypeOfInterviewEnum;
 import lombok.Data;
@@ -21,9 +22,9 @@ public class SelectionEntity {
     @Column(name = "select_in")
     Boolean selectIn;
     @Column(name = "positive_experience")
-    Enum positiveExperience;
+    RecommendEnum positiveExperience;
     @Column(name = "selection_process")
-    String selectionProcess;
+    Integer selectionProcess;
     @Column(name = "how_get_interview")
     String howGetInterview;
     @Column(name = "date_interview")
