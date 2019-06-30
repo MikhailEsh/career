@@ -14,13 +14,13 @@ import java.util.UUID;
 public class ReviewSalaryEntity {
     @Id
     @Column(name = "id")
-    UUID id;
+    private UUID id;
     @Column(name = "position")
-    String position;
+    private String position;
     @Column(name = "salaryrubinmonth")
-    Integer salaryRubInMonth;
+    private Integer salaryRubInMonth;
     @Column(name = "company")
-    UUID company;
+    private UUID company;
     @Column(name = "user")
-    UUID User;
+    private UUID User;
 }

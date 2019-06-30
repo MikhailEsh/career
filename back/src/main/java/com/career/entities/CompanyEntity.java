@@ -20,7 +20,7 @@ import java.util.UUID;
 public class CompanyEntity {
     @Id
     @Column(name = "id")
-    UUID id;
+    private UUID id;
     @Column(name = "name")
-    String name;
+    private String name;
 }
