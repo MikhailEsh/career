@@ -1,5 +1,6 @@
 package com.career.entities;
 
+import com.career.dto.enumDto.DateWorkEnum;
 import com.career.dto.enumDto.RecommendEnum;
 import com.career.dto.enumDto.StatusEmployeeEnum;
 import lombok.Data;
@@ -14,40 +15,48 @@ import java.util.UUID;
 @Entity
 @Data
 @Table(name = "review")
-public class ReviewEntity {
+public class ReviewCompanyEntity {
     @Id
     @Column(name = "id")
-    UUID id;
+    private UUID id;
     @Column(name = "name")
-    String name;
+    private String name;
+    @Column(name = "common_scale")
+    private Integer commonScale;
     @Column(name = "salary_scale")
-    Integer ZP;
+    private Integer salaryScale;
     @Column(name = "leadership_scale")
-    Integer leadership;
+    private Integer leadershipScale;
     @Column(name = "culture_scale")
-    Integer culture;
+    private Integer cultureScale;
     @Column(name = "career_scale")
-    Integer career;
+    private Integer careerScale;
     @Column(name = "balance_scale")
-    Integer balanceWorkHome;
+    private Integer balanceWorkHomeScale;
     @Column(name = "recommend")
-    RecommendEnum recommend;
+    private RecommendEnum recommend;
     @Column(name = "plus")
-    String plus;
+    private String plus;
     @Column(name = "minuses")
-    String minuses;
+    private String minuses;
     @Column(name = "date")
-    Date date;
+    private Date date;
     @Column(name = "status")
-    StatusEmployeeEnum status;
+    private StatusEmployeeEnum status;
     @Column(name = "position")
-    String position;
+    private String position;
     @Column(name = "useful")
-    Integer useful;
+    private Integer useful;
     @Column(name = "user")
-    UUID user;
+    private UUID user;
     @Column(name = "approved")
-    Boolean approved;
+    private Boolean approved;
     @Column(name = "company")
-    UUID company;
+    private UUID company;
+    @Column(name = "datework")
+    private DateWorkEnum dateWork;
+    @Column(name = "workdepartment")
+    private String workDepartment;
+    @Column(name="management_advice")
+    private String managementAdvice;
 }
