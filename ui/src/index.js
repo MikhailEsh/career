@@ -6,7 +6,6 @@ import { ApolloProvider } from 'react-apollo';
 import { createMuiTheme, MuiThemeProvider } from '@material-ui/core';
 import { ToastContainer, Flip } from 'react-toastify';
 import { graphql } from '@career/services/api';
-import * as Sentry from '@sentry/browser';
 import 'flag-icon-css/css/flag-icon.min.css';
 import 'font-awesome/css/font-awesome.min.css';
 import 'simple-line-icons/css/simple-line-icons.css';
@@ -15,10 +14,6 @@ import App from './App';
 import store from './store';
 import 'react-toastify/dist/ReactToastify.min.css';
 import 'typeface-roboto';
-
-Sentry.init({
-  dsn: 'https://75f7e500bf3043c5983c7a512924e22a@sentry.io/1435670',
-});
 
 const theme = createMuiTheme({
   palette: {

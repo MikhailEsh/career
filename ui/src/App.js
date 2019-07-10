@@ -14,32 +14,12 @@ class App extends PureComponent {
   };
 
   render() {
-    const { isAuthenticated } = true;
       return (
         <Suspense fallback={<LoadingProgress />}>
-          {isAuthenticated ? (
-            <Switch>
-              <Route exact path="/404" name="Page 404" component={Page404} />
-              <Route path="/test" name="Home" component={props => <DefaultLayout {...props} />} />
-            </Switch>
-          ) : (
-            <Switch>
-              <Route path={LOGIN_PAGE} component={LoginPage} />
-
-              {/* Redirect to Login, but remember requested route to return back after login success */}
-              <Route
-                render={({ location }) => (
-                  <Redirect
-                    to={{
-                      pathname: LOGIN_PAGE,
-                      // this flag will be handled by login page as redirect path after success
-                      navigateFrom: location.pathname,
-                    }}
-                  />
-                )}
-              />
-            </Switch>
-          )}
+          <Switch>
+            <Route exact path="/404" name="Page 404" component={Page404} />
+            <Route path="/" name="Home" component={props => <DefaultLayout {...props} />} />
+          </Switch>
         </Suspense>
       );
   }

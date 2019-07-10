@@ -1,3 +1,12 @@
-import AppLayout from './Layout';
+import React, {PureComponent} from "react";
 
-export default AppLayout;
+export default class Footer extends PureComponent {
+
+    render() {
+        return (
+            <div>
+                Footer
+            </div>
+        );
+    }
+}

@@ -1,3 +1,3 @@
-import AppLayout from './Layout';
+import AppLayout from './AppLayout';
 
 export default AppLayout;

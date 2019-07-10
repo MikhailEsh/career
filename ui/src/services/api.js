@@ -2,7 +2,6 @@
 import { stringify } from 'query-string';
 import { format, addDays } from 'date-fns';
 import ApolloClient from 'apollo-boost';
-import * as Sentry from '@sentry/browser';
 
 import { LOGOUT_SUCCESS } from '../constants/actions';
 import {
@@ -65,10 +64,6 @@ axi.interceptors.response.use(undefined, data => {
   } else {
     const error =
       data.response.data.message || data.message || data.response.statusText;
-    Sentry.withScope(scope => {
-      scope.setExtras({ description: error });
-      Sentry.captureException(new Error(data.request.responseURL));
-    });
     throw new Error(error);
   }
   return data;
