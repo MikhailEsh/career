@@ -65,3 +65,6 @@ frontend/package-lock.json
 .idea/**/dynamic.xml
 .idea/**/uiDesigner.xml
 .idea/**/dbnavigator.xml
+
+/.env*
+!/.env*.example
