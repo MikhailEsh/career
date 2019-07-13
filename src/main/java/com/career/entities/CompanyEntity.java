@@ -24,4 +24,9 @@ public class CompanyEntity  implements GQLEntity {
     private UUID id;
     @Column(name = "name")
     private String name;
+
+    @Override
+    public UUID getId() {
+        return id;
+    }
 }

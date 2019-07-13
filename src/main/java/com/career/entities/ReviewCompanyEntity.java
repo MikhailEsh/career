@@ -48,16 +48,21 @@ public class ReviewCompanyEntity implements GQLEntity {
     private String position;
     @Column(name = "useful")
     private Integer useful;
-    @Column(name = "user")
-    private UUID user;
+    @Column(name = "user_id")
+    private UUID userId;
     @Column(name = "approved")
     private Boolean approved;
-    @Column(name = "company")
-    private UUID company;
+    @Column(name = "company_id")
+    private UUID companyId;
     @Column(name = "datework")
     private DateWorkEnum dateWork;
     @Column(name = "workdepartment")
     private String workDepartment;
     @Column(name="management_advice")
     private String managementAdvice;
+
+    @Override
+    public UUID getId() {
+        return id;
+    }
 }
