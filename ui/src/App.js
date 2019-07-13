@@ -1,8 +1,7 @@
 import React, { PureComponent, Suspense } from 'react';
-import { Route, Switch, Redirect, withRouter } from 'react-router-dom';
+import { Route, Switch, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import DefaultLayout from '@career/components/AppLayout';
-import LoginPage from '@career/components/pages/Login';
 import Page404 from '@career/components/pages/Page404';
 import { LOGIN_PAGE } from '@career/constants/routes';
 import LoadingProgress from '@career/components/common/LoadingProgress';

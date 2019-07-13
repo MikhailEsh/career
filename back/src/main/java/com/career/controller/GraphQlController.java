@@ -28,7 +28,7 @@ public class GraphQlController implements ApplicationListener<ContextRefreshedEv
         graphQLExecutor = new GraphQLExecutor(em);
     }
 
-    @RequestMapping(path = "/graphql", method = RequestMethod.POST)
+    @RequestMapping(path = "/graphqlrest", method = RequestMethod.POST)
     ExecutionResult graphQl(@RequestBody final GraphQLInputQuery query) {
 
         Map<String, Object> variables = query.getVariables();

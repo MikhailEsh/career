@@ -1,1 +1,1 @@
-export const apiHost = '/tafsSrv';
+export const apiHost = '/graphqlrest';
