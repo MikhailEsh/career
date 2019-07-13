@@ -1,5 +1,6 @@
 package com.career.entities;
 
+import com.jraphql.cn.wzvtcsoft.x.bos.domain.GQLEntity;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -17,7 +18,7 @@ import java.util.UUID;
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "company")
-public class CompanyEntity {
+public class CompanyEntity  implements GQLEntity {
     @Id
     @Column(name = "id")
     private UUID id;

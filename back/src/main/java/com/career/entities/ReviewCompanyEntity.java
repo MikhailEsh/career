@@ -3,6 +3,7 @@ package com.career.entities;
 import com.career.dto.enumDto.DateWorkEnum;
 import com.career.dto.enumDto.RecommendEnum;
 import com.career.dto.enumDto.StatusEmployeeEnum;
+import com.jraphql.cn.wzvtcsoft.x.bos.domain.GQLEntity;
 import lombok.Data;
 
 import javax.persistence.Column;
@@ -15,7 +16,7 @@ import java.util.UUID;
 @Entity
 @Data
 @Table(name = "review")
-public class ReviewCompanyEntity {
+public class ReviewCompanyEntity implements GQLEntity {
     @Id
     @Column(name = "id")
     private UUID id;
