@@ -19,8 +19,8 @@ public class ReviewSalaryEntity {
     private String position;
     @Column(name = "salaryrubinmonth")
     private Integer salaryRubInMonth;
-    @Column(name = "company")
-    private UUID company;
-    @Column(name = "user")
-    private UUID User;
+    @Column(name = "company_id")
+    private UUID companyId;
+    @Column(name = "user_id")
+    private UUID userId;
 }

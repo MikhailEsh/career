@@ -40,10 +40,10 @@ public class ReviewSelectionEntity {
     private Integer difficult;
     @Column(name = "useful")
     private Integer useful;
-    @Column(name = "company")
-    private UUID company;
-    @Column(name = "user")
-    private UUID User;
+    @Column(name = "company_id")
+    private UUID companyId;
+    @Column(name = "user_id")
+    private UUID userId;
     @Column(name = "overview")
     private String overview;
     @Column(name = "time_taken")
