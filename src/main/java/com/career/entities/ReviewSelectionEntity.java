@@ -4,6 +4,7 @@ import com.career.dto.enumDto.HowToGetIntervew;
 import com.career.dto.enumDto.RecommendEnum;
 import com.career.dto.enumDto.TimeTakenEnum;
 import com.career.dto.enumDto.TypeOfInterviewOrTestEnum;
+import com.jraphql.cn.wzvtcsoft.x.bos.domain.GQLEntity;
 import lombok.Data;
 
 import javax.persistence.Column;
@@ -16,7 +17,7 @@ import java.util.UUID;
 @Entity
 @Data
 @Table(name = "review_selection")
-public class ReviewSelectionEntity {
+public class ReviewSelectionEntity implements GQLEntity {
     @Id
     @Column(name = "id")
     private UUID id;
@@ -48,4 +49,10 @@ public class ReviewSelectionEntity {
     private String overview;
     @Column(name = "time_taken")
     private TimeTakenEnum timeTaken;
+
+    @Override
+    public UUID getId() {
+        return id;
+    }
+
 }

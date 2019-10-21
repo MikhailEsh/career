@@ -5,8 +5,8 @@ import com.jraphql.cn.wzvtcsoft.x.bos.domain.CareerEnum;
 public enum HowToGetIntervew implements CareerEnum {
 
     RESPONDED_ONLINE("RESPONDED_ONLINE","Responded_online"),
-    СAREER_EVENT("СAREER_EVENT","Сareer_event"),
-    INVITED_COWORKER_OF_THE_COMPANY("INVITED_COWORKER_OF_THE_COMPANY","Шnvited_coworker_of_the_company"),
+    CAREER_EVENT("CAREER_EVENT","Career_event"),
+    INVITED_COWORKER_OF_THE_COMPANY("INVITED_COWORKER_OF_THE_COMPANY","Invited_coworker_of_the_company"),
     THROUGH_THE_AGENCY("THROUGH_THE_AGENCY","Through_the_agency"),
     OTHER("OTHER","OTHER");
     private CareerEnum.EnumInnerValue ev;

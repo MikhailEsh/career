@@ -5,7 +5,7 @@ import com.jraphql.cn.wzvtcsoft.x.bos.domain.CareerEnum;
 public enum  RecommendEnum implements CareerEnum{
 
     RECOMMEND("RECOMMEND","Recommend"),
-    NEUTRAL("NEUTRAL","neutral"),
+    NEUTRAL("NEUTRAL","Neutral"),
     UNRECOMMEND("UNRECOMMEND","Unrecommend");
     private CareerEnum.EnumInnerValue ev;
 

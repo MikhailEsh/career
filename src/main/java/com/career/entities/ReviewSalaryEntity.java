@@ -1,5 +1,6 @@
 package com.career.entities;
 
+import com.jraphql.cn.wzvtcsoft.x.bos.domain.GQLEntity;
 import lombok.Data;
 
 import javax.persistence.Column;
@@ -11,7 +12,7 @@ import java.util.UUID;
 @Entity
 @Data
 @Table(name = "review_salary")
-public class ReviewSalaryEntity {
+public class ReviewSalaryEntity implements GQLEntity {
     @Id
     @Column(name = "id")
     private UUID id;
@@ -23,4 +24,9 @@ public class ReviewSalaryEntity {
     private UUID companyId;
     @Column(name = "user_id")
     private UUID userId;
+
+    @Override
+    public UUID getId() {
+        return id;
+    }
 }
