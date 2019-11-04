@@ -4,14 +4,17 @@ import com.career.dto.enumDto.HowToGetIntervew;
 import com.career.dto.enumDto.RecommendEnum;
 import com.career.dto.enumDto.TimeTakenEnum;
 import com.career.dto.enumDto.TypeOfInterviewOrTestEnum;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.jraphql.cn.wzvtcsoft.x.bos.domain.GQLEntity;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
+import org.hibernate.annotations.LazyToOne;
+import org.hibernate.annotations.LazyToOneOption;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
-import java.sql.Date;
+import javax.persistence.*;
+import java.time.LocalDate;
 import java.util.UUID;
 
 @Entity
@@ -30,7 +33,7 @@ public class ReviewSelectionEntity implements GQLEntity {
     @Column(name = "how_get_interview")
     private HowToGetIntervew howGetInterview;
     @Column(name = "date_interview")
-    private Date dateInterview;
+    private LocalDate dateInterview;
     @Column(name = "question")
     private String questions;
     @Column(name = "type_interview")
@@ -41,8 +44,6 @@ public class ReviewSelectionEntity implements GQLEntity {
     private Integer difficult;
     @Column(name = "useful")
     private Integer useful;
-    @Column(name = "company_id")
-    private UUID companyId;
     @Column(name = "user_id")
     private UUID userId;
     @Column(name = "overview")
@@ -55,4 +56,11 @@ public class ReviewSelectionEntity implements GQLEntity {
         return id;
     }
 
+    @JsonIgnore
+    @ManyToOne
+    @JoinColumn(name="company_id", nullable=false)
+    @LazyToOne(LazyToOneOption.NO_PROXY)
+    @EqualsAndHashCode.Exclude
+    @Fetch(FetchMode.JOIN)
+    private CompanyEntity company;
 }

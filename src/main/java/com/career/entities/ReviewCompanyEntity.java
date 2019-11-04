@@ -3,19 +3,24 @@ package com.career.entities;
 import com.career.dto.enumDto.DateWorkEnum;
 import com.career.dto.enumDto.RecommendEnum;
 import com.career.dto.enumDto.StatusEmployeeEnum;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.jraphql.cn.wzvtcsoft.x.bos.domain.GQLEntity;
-import lombok.Data;
+import lombok.*;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
+import org.hibernate.annotations.LazyToOne;
+import org.hibernate.annotations.LazyToOneOption;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
-import java.sql.Date;
+import javax.persistence.*;
+import java.time.LocalDate;
 import java.util.UUID;
 
 @Entity
-@Data
-@Table(name = "review")
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@Table(name = "review_company")
 public class ReviewCompanyEntity implements GQLEntity {
     @Id
     @Column(name = "id")
@@ -41,7 +46,7 @@ public class ReviewCompanyEntity implements GQLEntity {
     @Column(name = "minuses")
     private String minuses;
     @Column(name = "date")
-    private Date date;
+    private LocalDate date;
     @Column(name = "status")
     private StatusEmployeeEnum status;
     @Column(name = "position")
@@ -52,8 +57,6 @@ public class ReviewCompanyEntity implements GQLEntity {
     private UUID userId;
     @Column(name = "approved")
     private Boolean approved;
-    @Column(name = "company_id")
-    private UUID companyId;
     @Column(name = "datework")
     private DateWorkEnum dateWork;
     @Column(name = "workdepartment")
@@ -65,4 +68,12 @@ public class ReviewCompanyEntity implements GQLEntity {
     public UUID getId() {
         return id;
     }
+
+    @JsonIgnore
+    @ManyToOne
+    @JoinColumn(name="company_id", nullable=false)
+    @LazyToOne(LazyToOneOption.NO_PROXY)
+    @EqualsAndHashCode.Exclude
+    @Fetch(FetchMode.JOIN)
+    private CompanyEntity company;
 }
