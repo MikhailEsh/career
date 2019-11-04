@@ -1,12 +1,15 @@
 package com.career.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.jraphql.cn.wzvtcsoft.x.bos.domain.GQLEntity;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
+import org.hibernate.annotations.LazyToOne;
+import org.hibernate.annotations.LazyToOneOption;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.UUID;
 
 @Entity
@@ -20,8 +23,6 @@ public class ReviewSalaryEntity implements GQLEntity {
     private String position;
     @Column(name = "salaryrubinmonth")
     private Integer salaryRubInMonth;
-    @Column(name = "company_id")
-    private UUID companyId;
     @Column(name = "user_id")
     private UUID userId;
 
@@ -29,4 +30,13 @@ public class ReviewSalaryEntity implements GQLEntity {
     public UUID getId() {
         return id;
     }
+
+    @JsonIgnore
+    @ManyToOne
+    @JoinColumn(name="company_id", nullable=false)
+    @LazyToOne(LazyToOneOption.NO_PROXY)
+    @EqualsAndHashCode.Exclude
+    @Fetch(FetchMode.JOIN)
+    private CompanyEntity company;
+
 }
