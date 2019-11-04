@@ -9,7 +9,6 @@ import org.hibernate.annotations.LazyToOne;
 import org.hibernate.annotations.LazyToOneOption;
 
 import javax.persistence.*;
-import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
@@ -32,8 +31,7 @@ public class CompanyEntity implements GQLEntity {
     private Integer countSalaryReview;
     @Column(name = "count_selection_review")
     private Integer countSelectionReview;
-    @Column(name = "time_added")
-    private LocalDateTime timeAdded;
+
 
     @Override
     public UUID getId() {
