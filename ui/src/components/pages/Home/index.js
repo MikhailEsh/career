@@ -2,163 +2,108 @@ import React, {PureComponent} from 'react';
 import {withRouter} from 'react-router-dom';
 import {connect} from 'react-redux';
 import {logIn} from '@career/acs/auth';
-import logo from '@career/assets/img/home/image.png';
-import match from 'autosuggest-highlight/match';
-import parse from 'autosuggest-highlight/parse';
-import Autosuggest from 'react-autosuggest';
-import TextField from '@material-ui/core/TextField';
-import MenuItem from '@material-ui/core/MenuItem';
-import Paper from '@material-ui/core/Paper';
-
-const suggestions = [
-    { label: 'Afghanistan' },
-    { label: 'Aland Islands' },
-    { label: 'Albania' },
-    { label: 'Algeria' },
-    { label: 'American Samoa' },
-    { label: 'Andorra' },
-    { label: 'Angola' },
-    { label: 'Anguilla' },
-    { label: 'Antarctica' },
-    { label: 'Antigua and Barbuda' },
-    { label: 'Argentina' },
-    { label: 'Armenia' },
-    { label: 'Aruba' },
-    { label: 'Australia' },
-    { label: 'Austria' },
-    { label: 'Azerbaijan' },
-    { label: 'Bahamas' },
-    { label: 'Bahrain' },
-    { label: 'Bangladesh' },
-    { label: 'Barbados' },
-    { label: 'Belarus' },
-    { label: 'Belgium' },
-    { label: 'Belize' },
-    { label: 'Benin' },
-    { label: 'Bermuda' },
-    { label: 'Bhutan' },
-    { label: 'Bolivia, Plurinational State of' },
-    { label: 'Bonaire, Sint Eustatius and Saba' },
-    { label: 'Bosnia and Herzegovina' },
-    { label: 'Botswana' },
-    { label: 'Bouvet Island' },
-    { label: 'Brazil' },
-    { label: 'British Indian Ocean Territory' },
-    { label: 'Brunei Darussalam' },
-];
-
-
+import styles from './index.module.css';
+import Card from '@material-ui/core/Card';
+import CardContent from '@material-ui/core/CardContent';
+import Typography from '@material-ui/core/Typography';
+import {getTopReview} from '@career/services/api';
+import AutosuggestCompany from '@career/components/common/AutosuggestCompany';
+import {notifyError} from '@career/services/notifications';
+import CompaniesInfo from '@career/components/common/CompaniesInfo'
 
 class Home extends PureComponent {
 
     constructor(props) {
         super(props);
         this.state = {
-            age: true,
-            single: '',
-            stateSuggestions: []
+            topReview: undefined
         }
     }
 
-    renderInputComponent(inputProps) {
-        const { classes, inputRef = () => {}, ref, ...other } = inputProps;
-
-        return (
-            <TextField
-                fullWidth
-                InputProps={{
-                    inputRef: node => {
-                        ref(node);
-                        inputRef(node);
-                    },
-                }}
-                {...other}
-            />
-        );
+    componentDidMount() {
+        this.loadData();
     }
 
-    handleSuggestionsFetchRequested = ({ value }) => {
-        console.log(value);
-        // setSuggestions(getSuggestions(value));
+    loadData = () => {
+        getTopReview()
+            .then(topReview => {
+                this.setState({
+                    topReview: topReview,
+                });
+            })
+            .catch(error => notifyError(error.message));
     };
 
-    handleSuggestionsClearRequested = () => {
-        // setSuggestions([]);
+    renderTopReview = () => {
+        if (this.state.topReview !== undefined) {
+            return <Card className={styles.card}>
+                <CardContent>
+                    <Typography variant="h5" component="h2">
+                        {this.state.topReview.company.name}
+                    </Typography>
+                    <Typography className={styles.title} color="textSecondary" gutterBottom>
+                        {this.state.topReview.position}
+                    </Typography>
+                    <Typography variant="body2" component="p">
+                        Зарплата и соцпакет 4,6
+                        <br/>
+                        Руководство 3,5
+                        <br/>
+                        Карьерные возможности 4,4
+                        <br/>
+                        Культура и ценности 4,3
+                        <br/>
+                        Баланс работы и жизни 4,3
+                    </Typography>
+                    <Typography className={styles.pos} color="textSecondary">
+                        Отзыв
+                    </Typography>
+                    <Typography variant="body2" component="p">
+                        {this.state.topReview.name}
+                    </Typography>
+                    <Typography className={styles.pos} color="textSecondary">
+                        Плюсы
+                    </Typography>
+                    <Typography variant="body2" component="p">
+                        {this.state.topReview.plus}
+                    </Typography>
+                    <Typography className={styles.pos} color="textSecondary">
+                        Минусы
+                    </Typography>
+                    <Typography variant="body2" component="p">
+                        {this.state.topReview.minuses}
+                    </Typography>
+                </CardContent>
+            </Card>
+        } else return "";
+
+
     };
-
-    getSuggestionValue(suggestion) {
-        return suggestion.label;
-    }
-
-
-    renderSuggestion(suggestion, { query, isHighlighted }) {
-        const matches = match(suggestion.label, query);
-        const parts = parse(suggestion.label, matches);
-
-        return (
-            <MenuItem selected={isHighlighted} component="div">
-                <div>
-                    {parts.map(part => (
-                        <span key={part.text} style={{ fontWeight: part.highlight ? 500 : 400 }}>
-            {part.text}
-          </span>
-                    ))}
-                </div>
-            </MenuItem>
-        );
-    }
-
-
-    autosuggestProps = {
-        renderInputComponent: this.renderInputComponent,
-        suggestions: suggestions,
-        onSuggestionsFetchRequested: this.handleSuggestionsFetchRequested,
-        onSuggestionsClearRequested: this.handleSuggestionsClearRequested,
-        getSuggestionValue: this.getSuggestionValue,
-        renderSuggestion: this.renderSuggestion,
-    };
-
-    handleChange = name => (event, { newValue }) => {
-        console.log(event);
-        this.setState((prevState) => {
-            return {
-                single: newValue
-            };
-        });
-    };
-
 
     render() {
         // const [age, setAge] = React.useState('');
+        // const classes = useStyles();
+        const bull = <span className={styles.bullet}>•</span>;
         return (
             <div>
                 <div>
-                    <a href="/">
-                        <img src={logo} alt="TAFS engine"/>
-                    </a>
+                    <h1>Поиск отзывов о работодателях и зарплатах при отборе компании</h1>
+                </div>
+                <AutosuggestCompany/>
+                <hr className={styles.lineseparator}/>
+                <div>
+                    {this.renderTopReview()}
+                    <hr className={styles.lineseparator}/>
+                    <CompaniesInfo/>
                 </div>
                 <div>
-                    <Autosuggest
-                        {...this.autosuggestProps}
-                        inputProps={{
-                            // classes,
-                            id: 'react-autosuggest-simple',
-                            label: 'Country',
-                            placeholder: 'Search a country (start with a)',
-                            value: this.state.single,
-                            onChange: this.handleChange('single'),
-                        }}
-                        renderSuggestionsContainer={options => (
-                            <Paper {...options.containerProps} square>
-                                {options.children}
-                            </Paper>
-                        )}
-                    />
+                    <br/>
+                    <br/>
+                    <br/>
+
+                    <div>Работодатели на ScanJob</div>
+                    <div> Имя компании Отзывы: 10 о компании, 15 о зарплате, 4 о отборе общая оценца 4.5</div>
                 </div>
-                <div>
-                    На этом сайте представлены наши компании
-                </div>
-                <div></div>
             </div>
         );
     }

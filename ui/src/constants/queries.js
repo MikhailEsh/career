@@ -1,356 +1,141 @@
 import gql from 'graphql-tag';
 import { getTime } from 'date-fns';
 
-export const getRuleFineTuningQuery = ruleId => ({
+export const getAllCompanyQuery = () => ({
   query: gql`
-    query($id: UUID!) {
-      RefRulesEntity(id: $id) {
+    query{
+      CompanyEntityList(paginator: {
+        size:100,page:1
+      }){
+      totalPages
+      totalElements
+      content {
+        countSelectionReview
         id
-        ruleCode
-        isWork
-        isGraph
-        favourite
-        tunings {
+        countCompanyReview
+        name
+        countSalaryReview
+      }  
+    }
+   }
+  `,
+  fetchPolicy: 'network-only',
+});
+
+export const getCompanyByIdQuery = (id) => ({
+  query: gql`
+  query{
+    CompanyEntity(id: "${id}"){
+      countSelectionReview,
+      countCompanyReview,
+      id,
+      name,
+      countSalaryReview
+    }
+  }
+  `,
+  fetchPolicy: 'network-only',
+});
+
+export const getAllReviewByCompanyQuery = companyId => ({
+  query: gql`
+    query {
+        ReviewCompanyEntityList(paginator:{
+  size:20,page:1
+  }, qfilter: {operator: equals, key: "company.id", value: "${companyId}"}) {
+    totalPages
+    totalElements
+    content {
+      salaryScale
+      minuses
+      recommend
+      date
+      leadershipScale
+      useful
+      workDepartment
+      company {
+        id
+      }
+      commonScale
+      plus
+      timeAdded
+      position
+      userId
+      id
+      status
+      dateWork
+      balanceWorkHomeScale
+      name
+      careerScale
+      approved
+      cultureScale
+      managementAdvice
+    } 
+  }
+    }
+  `,
+  fetchPolicy: 'no-cache',
+});
+
+
+export const getReviewSalariesByCompanyQuery = companyId => ({
+  query: gql`
+    query {
+        ReviewSalaryEntityList(paginator:{
+  size:20,page:1
+  }, qfilter: {operator: equals, key: "company.id", value: "${companyId}"}) {
+     totalPages
+    totalElements
+    content {
+      position
+      userId
+      id
+      salaryRubInMonth
+    } 
+    }
+  `,
+  fetchPolicy: 'no-cache',
+});
+
+
+export const getTopReviewQuery = () => ({
+  query: gql`
+    query{
+    ReviewCompanyEntityList(paginator:{
+    size:1,page:1
+    }) {
+      totalPages
+      totalElements
+      content {
+        salaryScale
+        minuses
+        recommend
+        date
+        leadershipScale
+        useful
+        workDepartment
+        company {
           id
-          user
-          priority
-          params {
-            id
-            name
-            value
-            defaultValue
-            operator
-            editable
-          }
+          name
         }
-        ruleGroup
-      }
+        commonScale
+        plus
+        position
+        userId
+        id
+        status
+        dateWork
+        balanceWorkHomeScale
+        name
+        careerScale
+        approved
+        cultureScale
+        timeAdded(OrderBy: DESC)
+        managementAdvice
+      } 
     }
+  }
   `,
-  variables: {
-    id: ruleId,
-  },
-  fetchPolicy: 'network-only',
+  fetchPolicy: 'no-cache',
 });
 
-export const getChartDealsPriceQuery = (dateFrom, dateTo, ticker) => ({
-  query: gql`
-    query {
-      MktEntityList (
-        qfilter: {
-          key: "mktDTime",
-          value: "${getTime(new Date(dateFrom))}",
-          operator: greaterThan,
-          combinator: AND,
-          next: {
-            key: "mktDTime",
-            value: "${getTime(new Date(dateTo))}",
-            operator: lessThan,
-            combinator: AND,
-            next: {
-              key: "ticker",
-              value: "${ticker}",
-              operator: equals
-            }
-          }
-        }
-      ) {
-        content {
-          mktDTime
-          mktLow
-          mktHigh
-        }
-      }
-      BaseEntityList (
-        qfilter: {
-          key: "dealDtime",
-          value: "${getTime(new Date(dateFrom))}",
-          operator: greaterThan,
-          combinator: AND,
-          next: {
-            key: "dealDtime",
-            value: "${getTime(new Date(dateTo))}",
-            operator: lessThan,
-            combinator: AND,
-            next: {
-              key: "ticker",
-              value: "${ticker}",
-              operator: equals
-            }
-          }
-        }
-      ) {
-        content {
-          dealDtime
-          baseDealId{
-            dealId
-          }
-          baseSpotForward {
-            price
-          }
-        }
-      }
-    }
-  `,
-});
-
-export const getChartIncidentsPriceQuery = (dateFrom, dateTo, ticker) => ({
-  query: gql`
-    query {
-      MktEntityList (
-        qfilter: {
-          key: "mktDTime",
-          value: "${getTime(new Date(dateFrom))}",
-          operator: greaterThan,
-          combinator: AND,
-          next: {
-            key: "mktDTime",
-            value: "${getTime(new Date(dateTo))}",
-            operator: lessThan,
-            combinator: AND,
-            next: {
-              key: "ticker",
-              value: "${ticker}",
-              operator: equals
-            }
-          }
-        }
-      ) {
-        content{
-          mktDTime
-          mktLow
-          mktHigh
-        }
-      }
-      IncidentEntityList (
-        qfilter: {
-          key: "deals.dealDtime",
-          value: "${getTime(new Date(dateFrom))}",
-          operator: greaterThan,
-          combinator: AND,
-          next: {
-            key: "deals.dealDtime",
-            value: "${getTime(new Date(dateTo))}",
-            operator: lessThan,
-            combinator: AND,
-            next: {
-              key: "deals.ticker",
-              value: "${ticker}",
-              operator: equals
-            }
-          }
-        }
-      ) {
-        content{
-          deals{
-            ticker
-            dealDtime
-            baseDealId{
-              dealId
-            }
-            baseSpotForward{
-              price
-            }
-          }
-        }
-      }
-    }
-  `,
-});
-
-export const getChartDealsVolumeQuery = (dateFrom, dateTo, ticker) => ({
-  query: gql`
-    query {
-      MktEntityList (
-        qfilter: {
-          key: "mktDTime",
-          value: "${getTime(new Date(dateFrom))}",
-          operator: greaterThan,
-          combinator: AND,
-          next: {
-            key: "mktDTime",
-            value: "${getTime(new Date(dateTo))}",
-            operator: lessThan,
-            combinator: AND,
-            next: {
-              key: "ticker",
-              value: "${ticker}",
-              operator: equals
-            }
-          }
-        }
-      ) {
-        content{
-          mktDTime
-          mktVolA
-        }
-      }
-      BaseEntityList (
-        qfilter: {
-          key: "dealDtime",
-          value: "${getTime(new Date(dateFrom))}",
-          operator: greaterThan,
-          combinator: AND,
-          next: {
-            key: "dealDtime",
-            value: "${getTime(new Date(dateTo))}",
-            operator: lessThan,
-            combinator: AND,
-            next: {
-              key: "ticker",
-              value: "${ticker}",
-              operator: equals
-            }
-          }
-        }
-      ) {
-        content{
-          dealDtime
-          baseDealId{
-            dealId
-          }
-          baseSpotForward{
-            volumeAsset
-          }
-        }
-      }
-    }
-  `,
-});
-
-export const getChartIncidentsVolumeQuery = (dateFrom, dateTo, ticker) => ({
-  query: gql`
-    query {
-      MktEntityList (
-        qfilter: {
-          key: "mktDTime",
-          value: "${getTime(new Date(dateFrom))}",
-          operator: greaterThan,
-          combinator: AND,
-          next: {
-            key: "mktDTime",
-            value: "${getTime(new Date(dateTo))}",
-            operator: lessThan,
-            combinator: AND,
-            next: {
-              key: "ticker",
-              value: "${ticker}",
-              operator: equals
-            }
-          }
-        }
-      ) {
-        content{
-          mktDTime
-          mktVolA
-        }
-      }
-      IncidentEntityList (
-        qfilter: {
-          key: "deals.dealDtime",
-          value: "${getTime(new Date(dateFrom))}",
-          operator: greaterThan,
-          combinator: AND,
-          next: {
-            key: "deals.dealDtime",
-            value: "${getTime(new Date(dateTo))}",
-            operator: lessThan,
-            combinator: AND,
-            next: {
-              key: "deals.ticker",
-              value: "${ticker}",
-              operator: equals
-            }
-          }
-        }
-      ) {
-        content{
-          deals{
-            ticker
-            dealDtime
-            baseDealId{
-              dealId
-            }
-            baseSpotForward{
-              volumeAsset
-            }
-          }
-        }
-      }
-    }
-  `,
-});
-
-export const getDealQuery = dealId => ({
-  query: gql`
-    query($id: UUID!) {
-      BaseEntity(id: $id) {
-        venue
-        desk
-        trader
-        salesTeam
-        dealDtime
-        contractcode
-        dealtype
-        ticker
-        asset
-        assetClass
-        businessLine
-        backOffice
-        middleOffice
-        lastEditedBy
-        user
-        statusDeal
-        location
-        client
-        counterparty
-        dealsourcetype
-        dealmode
-        portfolio
-        broker
-        currencyContract
-        dealDtimeAmended
-        dealDtimeAmendedEntry
-        dealDtimeCancelled
-        baseSpotForward {
-          contractDirection
-          mktHigh
-          mktLow
-          vdateAsset
-          vdateBase
-          clientMargin
-          price
-          volumeAsset
-          volumeBase
-          mktOpen
-          mktClose
-          currency
-          discount
-          netting
-        }
-        baseOption {
-          optionPremium
-          strike
-          optionType
-        }
-        baseDealId {
-          dealId01
-          dealIdLinked
-          orderIdAg
-          dealIdSwapRepo
-          dealNum
-        }
-        baseSpotAddFi {
-          accrued
-          interestRate
-          interestRateType
-          maturityDate
-        }
-      }
-    }
-  `,
-  variables: {
-    id: dealId,
-  },
-  fetchPolicy: 'network-only',
-});

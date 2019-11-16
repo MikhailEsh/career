@@ -1,4 +1,16 @@
 .header {
-  height: 60px;
+  height: 30px;
   background-color: #72777f;
+}
+
+.root {
+  flexGrow: 1
+}
+
+.menuButton {
+  marginRight: 2
+}
+
+.title {
+  flexGrow: 1
 }
