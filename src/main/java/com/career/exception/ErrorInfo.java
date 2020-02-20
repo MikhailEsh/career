@@ -1,9 +1,5 @@
 package com.career.exception;
 
-/**
- * Created by gubaoer on 17/7/2.
- */
-
 public class ErrorInfo<T> {
 
     public static final Integer OK = 0;

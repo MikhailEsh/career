@@ -10,12 +10,14 @@ import org.hibernate.annotations.LazyToOne;
 import org.hibernate.annotations.LazyToOneOption;
 
 import javax.persistence.*;
+import java.io.Serializable;
+import java.time.LocalDateTime;
 import java.util.UUID;
 
 @Entity
 @Data
 @Table(name = "review_salary")
-public class ReviewSalaryEntity implements GQLEntity {
+public class ReviewSalaryEntity implements Serializable,GQLEntity {
     @Id
     @Column(name = "id")
     private UUID id;
@@ -25,6 +27,10 @@ public class ReviewSalaryEntity implements GQLEntity {
     private Integer salaryRubInMonth;
     @Column(name = "user_id")
     private UUID userId;
+    @Column(name = "is_approved")
+    private Boolean isApproved;
+    @Column(name = "time_added")
+    private LocalDateTime timeAdded;
 
     @Override
     public UUID getId() {
@@ -32,11 +38,20 @@ public class ReviewSalaryEntity implements GQLEntity {
     }
 
     @JsonIgnore
-    @ManyToOne
-    @JoinColumn(name="company_id", nullable=false)
+    @ManyToOne(fetch = FetchType.LAZY, optional = false, cascade = CascadeType.DETACH)
+    @JoinColumn(name="company_id", referencedColumnName = "id"
+            , insertable = false, updatable = false)
     @LazyToOne(LazyToOneOption.NO_PROXY)
     @EqualsAndHashCode.Exclude
     @Fetch(FetchMode.JOIN)
     private CompanyEntity company;
 
+    public ReviewSalaryEntity(String position, Integer salaryRubInMonth, UUID userId, CompanyEntity company) {
+        this.position = position;
+        this.salaryRubInMonth = salaryRubInMonth;
+        this.userId = userId;
+        this.company = company;
+        this.isApproved =false;
+        this.id=UUID.randomUUID();
+    }
 }

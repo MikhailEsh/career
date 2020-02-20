@@ -56,8 +56,8 @@ public class ReviewCompanyEntity implements GQLEntity {
     private Integer useful;
     @Column(name = "user_id")
     private UUID userId;
-    @Column(name = "approved")
-    private Boolean approved;
+    @Column(name = "is_approved")
+    private Boolean isApproved;
     @Column(name = "datework")
     private DateWorkEnum dateWork;
     @Column(name = "workdepartment")
@@ -73,10 +73,51 @@ public class ReviewCompanyEntity implements GQLEntity {
     }
 
     @JsonIgnore
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY, optional = false, cascade = CascadeType.DETACH )
     @JoinColumn(name="company_id", nullable=false)
     @LazyToOne(LazyToOneOption.NO_PROXY)
     @EqualsAndHashCode.Exclude
     @Fetch(FetchMode.JOIN)
     private CompanyEntity company;
+
+    public ReviewCompanyEntity(String name,
+                               Integer commonScale,
+                               Integer salaryScale,
+                               Integer leadershipScale,
+                               Integer cultureScale,
+                               Integer careerScale,
+                               Integer balanceWorkHomeScale,
+                               RecommendEnum recommend,
+                               String plus,
+                               String minuses,
+                               StatusEmployeeEnum status,
+                               String position,
+                               Integer useful,
+                               UUID userId,
+                               DateWorkEnum dateWork,
+                               String workDepartment,
+                               String managementAdvice,
+                               CompanyEntity company) {
+        this.id=UUID.randomUUID();
+        this.name = name;
+        this.commonScale = commonScale;
+        this.salaryScale = salaryScale;
+        this.leadershipScale = leadershipScale;
+        this.cultureScale = cultureScale;
+        this.careerScale = careerScale;
+        this.balanceWorkHomeScale = balanceWorkHomeScale;
+        this.recommend = recommend;
+        this.plus = plus;
+        this.minuses = minuses;
+        this.status = status;
+        this.position = position;
+        this.useful = useful;
+        this.userId = userId;
+        this.dateWork = dateWork;
+        this.workDepartment = workDepartment;
+        this.managementAdvice = managementAdvice;
+        this.company = company;
+        this.timeAdded= LocalDateTime.now();
+        this.isApproved=false;
+    }
 }

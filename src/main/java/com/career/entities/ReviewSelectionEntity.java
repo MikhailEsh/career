@@ -15,6 +15,7 @@ import org.hibernate.annotations.LazyToOneOption;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.UUID;
 
 @Entity
@@ -50,6 +51,12 @@ public class ReviewSelectionEntity implements GQLEntity {
     private String overview;
     @Column(name = "time_taken")
     private TimeTakenEnum timeTaken;
+    @Column(name = "review_title")
+    private String reviewTitle;
+    @Column(name = "is_approved")
+    private Boolean isApproved;
+    @Column(name = "time_added")
+    private LocalDateTime timeAdded;
 
     @Override
     public UUID getId() {
@@ -57,10 +64,45 @@ public class ReviewSelectionEntity implements GQLEntity {
     }
 
     @JsonIgnore
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY, optional = false, cascade = CascadeType.DETACH )
     @JoinColumn(name="company_id", nullable=false)
     @LazyToOne(LazyToOneOption.NO_PROXY)
     @EqualsAndHashCode.Exclude
     @Fetch(FetchMode.JOIN)
     private CompanyEntity company;
+
+    public ReviewSelectionEntity(Boolean selectIn,
+                                 RecommendEnum positiveExperience,
+                                 Integer selectionProcess,
+                                 HowToGetIntervew howGetInterview,
+                                 LocalDate dateInterview,
+                                 String questions,
+                                 TypeOfInterviewOrTestEnum typeOfInterview,
+                                 TypeOfInterviewOrTestEnum tests,
+                                 Integer difficult,
+                                 Integer useful,
+                                 UUID userId,
+                                 String overview,
+                                 TimeTakenEnum timeTaken,
+                                 String reviewTitle,
+                                 CompanyEntity company) {
+       this.id=UUID.randomUUID();
+        this.selectIn = selectIn;
+        this.positiveExperience = positiveExperience;
+        this.selectionProcess = selectionProcess;
+        this.howGetInterview = howGetInterview;
+        this.dateInterview = dateInterview;
+        this.questions = questions;
+        this.typeOfInterview = typeOfInterview;
+        this.tests = tests;
+        this.difficult = difficult;
+        this.useful = useful;
+        this.userId = userId;
+        this.overview = overview;
+        this.timeTaken = timeTaken;
+        this.reviewTitle = reviewTitle;
+        this.company = company;
+        this.isApproved =false;
+        this.id=UUID.randomUUID();
+    }
 }

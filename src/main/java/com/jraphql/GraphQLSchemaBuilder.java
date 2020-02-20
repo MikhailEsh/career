@@ -1,7 +1,7 @@
 package com.jraphql;
 
-import com.jraphql.cn.wzvtcsoft.x.bos.domain.GQLEntity;
 import com.jraphql.cn.wzvtcsoft.x.bos.domain.CareerEnum;
+import com.jraphql.cn.wzvtcsoft.x.bos.domain.GQLEntity;
 import com.jraphql.cn.wzvtcsoft.x.bos.domain.util.BosUtils;
 import graphql.Scalars;
 import graphql.schema.*;
@@ -78,6 +78,8 @@ public class GraphQLSchemaBuilder extends GraphQLSchema.Builder implements IGrap
         this.classGraphQlScalarTypeMap.put(int.class, Scalars.GraphQLInt);
         this.classGraphQlScalarTypeMap.put(float.class, Scalars.GraphQLFloat);
         this.classGraphQlScalarTypeMap.put(Float.class, Scalars.GraphQLFloat);
+        this.classGraphQlScalarTypeMap.put(double.class, Scalars.GraphQLFloat);
+        this.classGraphQlScalarTypeMap.put(Double.class, Scalars.GraphQLFloat);
         this.classGraphQlScalarTypeMap.put(long.class, Scalars.GraphQLLong);
         this.classGraphQlScalarTypeMap.put(Long.class, Scalars.GraphQLLong);
         this.classGraphQlScalarTypeMap.put(boolean.class, Scalars.GraphQLBoolean);

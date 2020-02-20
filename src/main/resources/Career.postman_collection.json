@@ -1,0 +1,499 @@
+{
+	"info": {
+		"_postman_id": "9563566f-72fa-46f5-90a0-0eada90de1ab",
+		"name": "Career",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "update-count-by-id",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "companyId",
+							"value": "83fd628f-4b13-4399-a256-98f83cd3c393",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{host}}/api/review/update-count-by-id",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"review",
+						"update-count-by-id"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "update-count-all",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "pass",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "user",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/x-www-form-urlencoded"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{host}}/api/review/update-count-all",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"review",
+						"update-count-all"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "aggregation-salary-by-id",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"url": {
+					"raw": "{{host}}/api/review/aggregation-salary-by-id?companyId=6b048c5a-a42b-4892-9b4a-553dab9a25c9",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"review",
+						"aggregation-salary-by-id"
+					],
+					"query": [
+						{
+							"key": "companyId",
+							"value": "6b048c5a-a42b-4892-9b4a-553dab9a25c9"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "aggregation-salary-all",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "pass",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "user",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/x-www-form-urlencoded"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{host}}/api/review/aggregation-salary-all",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"review",
+						"aggregation-salary-all"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "add_common_review",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "pass",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "user",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "company_id",
+							"value": "816fb67a-4368-45cf-a80b-5e95f5e4b2b5",
+							"type": "text"
+						},
+						{
+							"key": "name",
+							"value": "test_name",
+							"type": "text"
+						},
+						{
+							"key": "commonScale",
+							"value": "4",
+							"type": "text"
+						},
+						{
+							"key": "salaryScale",
+							"value": "4",
+							"type": "text"
+						},
+						{
+							"key": "leadershipScale",
+							"value": "2",
+							"type": "text"
+						},
+						{
+							"key": "cultureScale",
+							"value": "2",
+							"type": "text"
+						},
+						{
+							"key": "careerScale",
+							"value": "3",
+							"type": "text"
+						},
+						{
+							"key": "balanceWorkHomeScale",
+							"value": "4",
+							"type": "text"
+						},
+						{
+							"key": "recommend",
+							"value": "UNRECOMMEND",
+							"type": "text"
+						},
+						{
+							"key": "plus",
+							"value": "test_plus",
+							"type": "text"
+						},
+						{
+							"key": "minuses",
+							"value": "test_minuses",
+							"type": "text"
+						},
+						{
+							"key": "status",
+							"value": "WORK_NOW",
+							"type": "text"
+						},
+						{
+							"key": "position",
+							"value": "test_position",
+							"type": "text"
+						},
+						{
+							"key": "useful",
+							"value": "0",
+							"type": "text"
+						},
+						{
+							"key": "userId",
+							"value": "94ee963b-8f4d-48ff-9b4f-feef753fd274",
+							"type": "text"
+						},
+						{
+							"key": "dateWork",
+							"value": "BETWEEN_3_4_YEAR",
+							"type": "text"
+						},
+						{
+							"key": "workDepartment",
+							"value": "",
+							"type": "text"
+						},
+						{
+							"key": "managementAdvice",
+							"value": "test_manager_advice",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{host}}/api/review/common",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"review",
+						"common"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "add_salary_review",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "pass",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "user",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/x-www-form-urlencoded",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "position",
+							"value": "test_position",
+							"type": "text"
+						},
+						{
+							"key": "salaryrubinmonth",
+							"value": "2",
+							"type": "text"
+						},
+						{
+							"key": "companyId",
+							"value": "816fb67a-4368-45cf-a80b-5e95f5e4b2b5",
+							"type": "text"
+						},
+						{
+							"key": "userId",
+							"value": "94ee963b-8f4d-48ff-9b4f-feef753fd274",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{host}}/api/review/salary",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"review",
+						"salary"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "add_selection_review",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "pass",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "user",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/x-www-form-urlencoded",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "select_in",
+							"value": "true",
+							"type": "text"
+						},
+						{
+							"key": "positive_experience",
+							"value": "RECOMMEND",
+							"type": "text"
+						},
+						{
+							"key": "selection_process",
+							"value": "1",
+							"type": "text"
+						},
+						{
+							"key": "how_get_interview",
+							"value": "RESPONDED_ONLINE",
+							"type": "text"
+						},
+						{
+							"key": "date_interview",
+							"value": "2020-01-01",
+							"type": "text"
+						},
+						{
+							"key": "question",
+							"value": "test_question",
+							"type": "text"
+						},
+						{
+							"key": "type_interview",
+							"value": "SKYPE",
+							"type": "text"
+						},
+						{
+							"key": "tests",
+							"value": "SKYPE",
+							"type": "text"
+						},
+						{
+							"key": "difficult",
+							"value": "1",
+							"type": "text"
+						},
+						{
+							"key": "useful",
+							"value": "1",
+							"type": "text"
+						},
+						{
+							"key": "company_id",
+							"value": "816fb67a-4368-45cf-a80b-5e95f5e4b2b5",
+							"type": "text"
+						},
+						{
+							"key": "user_id",
+							"value": "94ee963b-8f4d-48ff-9b4f-feef753fd274",
+							"type": "text"
+						},
+						{
+							"key": "overview",
+							"value": "test_overview",
+							"type": "text"
+						},
+						{
+							"key": "time_taken",
+							"value": "WEEK",
+							"type": "text"
+						},
+						{
+							"key": "review_title",
+							"value": "test_review",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{host}}/api/review/selection",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"review",
+						"selection"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}

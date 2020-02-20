@@ -1,8 +1,5 @@
 package com.career.exception;
 
-/**
- * Created by gubaoer on 17/7/2.
- */
 
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ResponseBody;
