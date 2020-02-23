@@ -9,5 +9,4 @@ import java.util.UUID;
 @Repository
 public interface ReviewCompanyRepo extends JpaRepository<ReviewCompanyEntity, UUID> {
 
-
 }

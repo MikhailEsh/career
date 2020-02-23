@@ -3,10 +3,6 @@ package com.career.entities;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.jraphql.cn.wzvtcsoft.x.bos.domain.GQLEntity;
 import lombok.*;
-import org.hibernate.annotations.Fetch;
-import org.hibernate.annotations.FetchMode;
-import org.hibernate.annotations.LazyToOne;
-import org.hibernate.annotations.LazyToOneOption;
 
 import javax.persistence.*;
 import java.util.HashSet;
@@ -31,6 +27,18 @@ public class CompanyEntity implements GQLEntity {
     private Integer countSalaryReview;
     @Column(name = "count_selection_review")
     private Integer countSelectionReview;
+    @Column(name = "average_common_scale")
+    private Double averageCommonScale;
+    @Column(name = "average_salary_scale")
+    private Double averageSalaryScale;
+    @Column(name = "average_leadership_scale")
+    private Double averageLeadershipScale;
+    @Column(name = "average_culture_scale")
+    private Double averageCultureScale;
+    @Column(name = "average_career_scale")
+    private Double averageCareerScale;
+    @Column(name = "average_balance_scale")
+    private Double averageBalanceScale;
 
 
     @Override
@@ -41,26 +49,23 @@ public class CompanyEntity implements GQLEntity {
     @JsonIgnore
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "company",
             cascade = CascadeType.ALL, orphanRemoval = true)
-    @LazyToOne(LazyToOneOption.NO_PROXY)
     @EqualsAndHashCode.Exclude
-    @Fetch(FetchMode.JOIN)
-    private Set<ReviewCompanyEntity> reviewCompanyEntities=new HashSet<ReviewCompanyEntity>();
+    private Set<ReviewCompanyEntity> reviewCompanyEntities = new HashSet<ReviewCompanyEntity>();
 
     @JsonIgnore
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "company",
             cascade = CascadeType.ALL, orphanRemoval = true)
-    @LazyToOne(LazyToOneOption.NO_PROXY)
     @EqualsAndHashCode.Exclude
-    @Fetch(FetchMode.JOIN)
 
-    private Set<ReviewSalaryEntity> reviewSalaryEntities=new HashSet<ReviewSalaryEntity>();
+    private Set<ReviewSalaryEntity> reviewSalaryEntities = new HashSet<ReviewSalaryEntity>();
 
     @JsonIgnore
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "company",
             cascade = CascadeType.ALL, orphanRemoval = true)
-    @LazyToOne(LazyToOneOption.NO_PROXY)
     @EqualsAndHashCode.Exclude
-    @Fetch(FetchMode.JOIN)
-    private Set<ReviewSelectionEntity> reviewSelectionEntities=new HashSet<ReviewSelectionEntity>();
+    private Set<ReviewSelectionEntity> reviewSelectionEntities = new HashSet<ReviewSelectionEntity>();
 
+    public CompanyEntity(UUID id){
+        this.id=id;
+    }
 }
