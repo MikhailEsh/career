@@ -3,93 +3,87 @@ import {withRouter} from 'react-router-dom';
 import {connect} from 'react-redux';
 import {logIn} from '@career/acs/auth';
 import styles from './index.module.css';
-import Grid from '@material-ui/core/Grid';
-import Paper from '@material-ui/core/Paper';
-import Typography from '@material-ui/core/Typography';
-import AppBar from '@material-ui/core/AppBar';
-import Tabs from '@material-ui/core/Tabs';
-import Tab from '@material-ui/core/Tab';
-import AboutCompany from './AboutCompany';
-import AboutInterview from './AboutInterview';
-import {getCompanyById} from '@career/services/api';
-import AboutSalary from './AboutSalary';
-import {notifyError} from '@career/services/notifications';
+import breadcrambArrow from '@career/assets/img/system/breadcramb-arrow.svg';
+import AboutCompanyCard from './AboutCompanyСard'
+import AboutSalary from './AboutSalary'
+import AboutPhotos from './AboutPhotos'
+import AboutInterview from './AboutInterview'
+import sberIkon from "@career/assets/img/companies/sber-ikon.svg";
+import starGreen from "@career/assets/img/system/star-green.svg";
+import star50 from "@career/assets/img/system/star-50.svg";
+import starGrey from "@career/assets/img/system/star-grey.svg";
+import Aside from '@career/components/common/Aside';
 
 class ReviewCompanies extends PureComponent {
 
     constructor(props) {
         super(props);
         this.state = {
-            company: {},
-            valueOfTab: 0,
-            id: this.props.match.params.id
+            selectedTabId: AboutCompanyCard.getTabId()
         }
     }
 
-    componentDidMount() {
-        this.loadData();
+    onClickTab(e) {
+        e.preventDefault();
+        const  tabId = e.target.id;
+        if (tabId !== undefined && tabId !== "") {
+            this.setState({
+                selectedTabId: tabId,
+            });
+        }
     }
 
-    loadData = () => {
-        getCompanyById(this.state.id)
-            .then(company => {
-                this.setState({
-                    company: company,
-                });
-            })
-            .catch(error => notifyError(error.message));
-    };
-
-    a11yProps(index) {
-        return {
-            id: `simple-tab-${index}`,
-            'aria-controls': `simple-tabpanel-${index}`,
-        };
+    classOfTab(tabId) {
+        if (this.state.selectedTabId === tabId) {
+            return styles.active
+        } else return "";
     }
-
-    handleChangeTab = (event, newValue) => {
-        this.setState({
-            valueOfTab: newValue,
-        });
-    };
 
     render() {
-        const lableAboutCompany = "О компании " + this.state.company.countCompanyReview;
-        const lableSalary = "Зарплаты " + this.state.company.countSalaryReview;
-        const lableInterview = "Отбор " + this.state.company.countSelectionReview;
         return (
             <div className={styles.root}>
-                <Grid container spacing={3}>
-                    <Grid item xs={12}>
-                        <Paper className={styles.paper}>Здесь находиться поисковая строка</Paper>
-                    </Grid>
-                    <hr className={styles.lineseparator}/>
-                    <Grid item xs={9}>
-                        <Typography variant="h3" gutterBottom>
-                            {this.state.company.name}
-                        </Typography>
-                        <br/>
-                        <div className={styles.root}>
-                            <AppBar position="static">
-                                <Tabs
-                                    value={this.state.valueOfTab}
-                                    onChange={this.handleChangeTab}
-                                    aria-label="simple tabs example"
-                                >
-                                    <Tab label={lableAboutCompany} {...this.a11yProps(0)} />
-                                    <Tab label={lableSalary} {...this.a11yProps(1)} />
-                                    <Tab label={lableInterview} {...this.a11yProps(2)} />
-                                </Tabs>
-                            </AppBar>
-                            <AboutCompany value={this.state.valueOfTab} index={0} company={this.state.company} idCompany = {this.state.id}/>
-                            <AboutSalary value={this.state.valueOfTab} index={1}/>
-                            <AboutInterview value={this.state.valueOfTab} index={2}/>
+                <main className={styles.company}>
+                    <div className={styles.container}>
+                        <div className={styles.breadcrambs}><a href="#"><img src={breadcrambArrow}/><span>Вернуться к списку компаний</span></a>
+                            <p>В нашей базе свыше 1280 компаний</p>
                         </div>
-                    </Grid>
-                    <Grid item xs={3}>
-                        <Paper className={styles.paper}>Здесь находиться боковая панель и прочяя херня</Paper>
-                    </Grid>
-                </Grid>
+                        <div className={styles.content}>
+                            <div className={styles.card}>
+                                <div className={styles.header}>
+                                    <div className={styles.company}>
+                                        <div className={styles.logo}><img src={sberIkon}/></div>
+                                        <div className={styles.info}>
+                                            <p className={styles.name}>Сбербанк</p>
+                                            <p className={styles.service}>Банковские услуги частным клиентам.</p>
+                                        </div>
+                                    </div>
+                                    <div className={styles.rating}>
+                                        <div className="stars"><img src={starGreen}/><img
+                                            src={starGreen}/><img src={star50}/><img
+                                            src={starGrey}/><img src={starGrey}/></div>
+                                        <span>2.4</span>
+                                    </div>
+                                    <div className={styles.tabs} onClick={(e) => this.onClickTab(e)}>
+                                        <ul>
+                                            <li className={this.classOfTab(AboutCompanyCard.getTabId())}><a href="#" id={AboutCompanyCard.getTabId()}>О
+                                                компании <span>(24)</span></a></li>
+                                            <li className={this.classOfTab(AboutSalary.getTabId())}><a href="#" id={AboutSalary.getTabId()}>О зарплате <span>(4)</span></a>
+                                            </li>
+                                            <li className={this.classOfTab(AboutInterview.getTabId())}><a href="#" id={AboutInterview.getTabId()}>Об
+                                                отборе <span>(10)</span></a></li>
+                                            <li className={this.classOfTab(AboutPhotos.getTabId())}><a href="#" id={AboutPhotos.getTabId()}>Фото</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            {<AboutCompanyCard selectedTabId = {this.state.selectedTabId}/>}
+                            {<AboutSalary selectedTabId = {this.state.selectedTabId}/>}
+                            {<AboutInterview selectedTabId = {this.state.selectedTabId}/>}
+                            {<AboutPhotos selectedTabId = {this.state.selectedTabId}/>}
+                        </div>
+                        {<Aside/>}
+                    </div>
+                </main>
             </div>
         );
     }
