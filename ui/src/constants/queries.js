@@ -1,11 +1,11 @@
 import gql from 'graphql-tag';
 import { getTime } from 'date-fns';
 
-export const getAllCompanyQuery = () => ({
+export const getAllCompanyQuery = (size, page) => ({
   query: gql`
     query{
       CompanyEntityList(paginator: {
-        size:100,page:1
+        size:${size},page:${page}
       }){
       totalPages
       totalElements
@@ -15,6 +15,7 @@ export const getAllCompanyQuery = () => ({
         countCompanyReview
         name
         countSalaryReview
+        averageCommonScale
       }  
     }
    }
@@ -98,11 +99,11 @@ export const getReviewSalariesByCompanyQuery = companyId => ({
 });
 
 
-export const getTopReviewQuery = () => ({
+export const getTopReviewQuery = (size, page) => ({
   query: gql`
     query{
     ReviewCompanyEntityList(paginator:{
-    size:1,page:1
+    size:${size},page:${page}
     }) {
       totalPages
       totalElements
@@ -128,7 +129,6 @@ export const getTopReviewQuery = () => ({
         balanceWorkHomeScale
         name
         careerScale
-        approved
         cultureScale
         timeAdded(OrderBy: DESC)
         managementAdvice

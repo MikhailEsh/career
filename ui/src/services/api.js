@@ -57,10 +57,10 @@ export const graphql = new ApolloClient({
     },
 });
 
-export function getAllCompanies() {
+export function getAllCompanies(size, page) {
     return new Promise((resolve, reject) =>
         graphql
-            .query(getAllCompanyQuery())
+            .query(getAllCompanyQuery(size, page))
             .then(response => {
                 if (response.errors) {
                     throw new Error(response.errors[0]);
@@ -113,15 +113,15 @@ export function getReviewSalariesByCompany(companyId) {
     );
 }
 
-export function getTopReview() {
+export function getTopReview(size, page) {
     return new Promise((resolve, reject) =>
         graphql
-            .query(getTopReviewQuery())
+            .query(getTopReviewQuery(size, page))
             .then(response => {
                 if (response.errors) {
                     throw new Error(response.errors[0]);
                 }
-                resolve(response.data.ReviewCompanyEntityList.content[0]);
+                resolve(response.data.ReviewCompanyEntityList.content);
             })
             .catch(error => reject(error))
     );
