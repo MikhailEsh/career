@@ -12,7 +12,6 @@ import org.hibernate.annotations.LazyToOne;
 import org.hibernate.annotations.LazyToOneOption;
 
 import javax.persistence.*;
-import java.sql.Timestamp;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.UUID;
@@ -66,7 +65,7 @@ public class ReviewCompanyEntity implements GQLEntity {
     @Column(name="management_advice")
     private String managementAdvice;
     @Column(name = "time_added")
-    private Timestamp timeAdded;
+    private LocalDateTime timeAdded;
     @Override
     public UUID getId() {
         return id;

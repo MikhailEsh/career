@@ -39,6 +39,24 @@ public class CompanyEntity implements GQLEntity {
     private Double averageCareerScale;
     @Column(name = "average_balance_scale")
     private Double averageBalanceScale;
+    @Column(name = "average_selection_difficult_scale")
+    private Double averageSelectionDifficultScale;
+    @Column(name = "how_to_get_selection_0_count")
+    private Long howToGetSelection0Count;
+    @Column(name = "how_to_get_selection_1_count")
+    private Long howToGetSelection1Count;
+    @Column(name = "how_to_get_selection_2_count")
+    private Long howToGetSelection2Count;
+    @Column(name = "how_to_get_selection_3_count")
+    private Long howToGetSelection3Count;
+    @Column(name = "how_to_get_selection_4_count")
+    private Long howToGetSelection4Count;
+    @Column(name = "useful_0_count")
+    private Long useful0Count;
+    @Column(name = "useful_1_count")
+    private Long useful1Count;
+    @Column(name = "useful_2_count")
+    private Long useful2Count;
 
 
     @Override
@@ -56,7 +74,6 @@ public class CompanyEntity implements GQLEntity {
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "company",
             cascade = CascadeType.ALL, orphanRemoval = true)
     @EqualsAndHashCode.Exclude
-
     private Set<ReviewSalaryEntity> reviewSalaryEntities = new HashSet<ReviewSalaryEntity>();
 
     @JsonIgnore
@@ -65,7 +82,7 @@ public class CompanyEntity implements GQLEntity {
     @EqualsAndHashCode.Exclude
     private Set<ReviewSelectionEntity> reviewSelectionEntities = new HashSet<ReviewSelectionEntity>();
 
-    public CompanyEntity(UUID id){
-        this.id=id;
+    public CompanyEntity(UUID id) {
+        this.id = id;
     }
 }
