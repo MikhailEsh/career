@@ -6,8 +6,7 @@ import com.career.dto.enumDto.TimeTakenEnum;
 import com.career.dto.enumDto.TypeOfInterviewOrTestEnum;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.jraphql.cn.wzvtcsoft.x.bos.domain.GQLEntity;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
+import lombok.*;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 import org.hibernate.annotations.LazyToOne;
@@ -19,7 +18,10 @@ import java.time.LocalDateTime;
 import java.util.UUID;
 
 @Entity
-@Data
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 @Table(name = "review_selection")
 public class ReviewSelectionEntity implements GQLEntity {
     @Id
