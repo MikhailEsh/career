@@ -8,10 +8,6 @@ import classNames from "classnames";
 
 class LeaveFeedbackSelection extends PureComponent {
 
-    constructor(props) {
-        super(props);
-    }
-
     static getTabId() {
         return "leave-feedback-selection";
     }

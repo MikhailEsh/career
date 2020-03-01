@@ -31,18 +31,24 @@ export const getCompanyByIdQuery = (id) => ({
       countCompanyReview,
       id,
       name,
-      countSalaryReview
+      countSalaryReview,
+      averageCommonScale,
+      averageSalaryScale,
+      averageLeadershipScale,
+      averageCareerScale,
+      averageBalanceScale,
+      averageCultureScale
     }
   }
   `,
   fetchPolicy: 'network-only',
 });
 
-export const getAllReviewByCompanyQuery = companyId => ({
+export const getAllReviewByCompanyQuery = (companyId, size, page) => ({
   query: gql`
     query {
         ReviewCompanyEntityList(paginator:{
-  size:20,page:1
+  size:${size},page:${page}
   }, qfilter: {operator: equals, key: "company.id", value: "${companyId}"}) {
     totalPages
     totalElements
@@ -68,7 +74,6 @@ export const getAllReviewByCompanyQuery = companyId => ({
       balanceWorkHomeScale
       name
       careerScale
-      approved
       cultureScale
       managementAdvice
     } 
@@ -83,16 +88,18 @@ export const getReviewSalariesByCompanyQuery = companyId => ({
   query: gql`
     query {
         ReviewSalaryEntityList(paginator:{
-  size:20,page:1
+  size:100,page:1
   }, qfilter: {operator: equals, key: "company.id", value: "${companyId}"}) {
      totalPages
     totalElements
     content {
+      timeAdded
+      isApproved
       position
-      userId
-      id
       salaryRubInMonth
+      id
     } 
+    }
     }
   `,
   fetchPolicy: 'no-cache',

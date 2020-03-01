@@ -4,11 +4,9 @@ import {connect} from 'react-redux';
 import {logIn} from '@career/acs/auth';
 import styles from './index.module.css';
 import classNames from "classnames";
-import starGreen from '@career/assets/img/system/star-green.svg';
-import star50 from '@career/assets/img/system/star-50.svg';
-import starGrey from '@career/assets/img/system/star-grey.svg';
 import minus from "@career/assets/img/system/minus.svg";
 import plus from "@career/assets/img/system/plus.svg";
+import Rating from "@career/components/common/Rating";
 import {getTopReview, getAllCompanies} from '@career/services/api';
 import {notifyError} from '@career/services/notifications';
 import cityIkon from "@career/assets/img/system/city-ikon.svg";
@@ -48,30 +46,6 @@ class Home extends PureComponent {
             .catch(error => notifyError(error.message));
     };
 
-    getStar(sign, rating) {
-        debugger
-        if ((rating - sign) > 0) {
-            if ((rating - sign) < 1) {
-                return star50;
-            } else return starGreen;
-        } else return starGrey;
-    }
-
-    renderRating(scale) {
-        const roundRating = Number((scale).toFixed(1));
-        const positions = Array.from(Array(5).keys());
-        return <div className={styles.rating}>
-            <div className="stars">
-                {
-                    positions.map(position => {
-                        return <img src={this.getStar(position, roundRating)}/>;
-                    })
-                }
-            </div>
-            <span>{Number((roundRating).toFixed(1))}</span>
-        </div>
-    }
-
     renderCompanyItem(company) {
         return <div className={styles.item} id={company.id}>
             <div className={styles.employerInfo}>
@@ -92,12 +66,12 @@ class Home extends PureComponent {
                         href="#">{company.countSelectionReview}</a></span></p>
                 </div>
             </div>
-            {this.renderRating(company.averageCommonScale)}
+            <Rating rating={company.averageCommonScale}/>
+            {/*{this.renderRating(company.averageCommonScale)}*/}
         </div>;
     }
 
     calcPlusMinus(rating) {
-        debugger
         if (rating >= 2.5) {
             return plus
         } else return minus
@@ -110,12 +84,14 @@ class Home extends PureComponent {
                     <div className={styles.logo}><img src="/assets/img/companyIcon/sber-ikon.svg"/></div>
                     <div className={styles.company}>
                         <p>{review.company.name}</p>
-                        {this.renderRating(review.commonScale)}
+                        <Rating rating={review.commonScale}/>
                     </div>
                 </div>
                 <div className="date"><Moment format="LL" locale="ru" date={review.timeAdded}/></div>
             </div>
             <div className={styles.reviewContent}>
+                <p className={styles.title}>{review.name}</p>
+                <br/>
                 <p className={styles.title}>Плюсы:</p>
                 <p className={styles.text}>{review.plus}</p>
                 <br/>

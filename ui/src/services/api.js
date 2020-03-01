@@ -85,10 +85,10 @@ export function getCompanyById(id) {
     );
 }
 
-export function getAllReviewByCompany(companyId) {
+export function getAllReviewByCompany(companyId, size, page) {
     return new Promise((resolve, reject) =>
         graphql
-            .query(getAllReviewByCompanyQuery(companyId))
+            .query(getAllReviewByCompanyQuery(companyId, size, page))
             .then(response => {
                 if (response.errors) {
                     throw new Error(response.errors[0]);

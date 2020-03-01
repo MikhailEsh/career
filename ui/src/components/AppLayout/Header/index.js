@@ -46,7 +46,7 @@ class Header extends PureComponent {
                         <nav>
                             <ul>
                                 <li className={styles.active}><a href="#">Главная</a></li>
-                                <li><a href="#">Все компании</a></li>
+                                <li><a href="/allcompanies">Все компании</a></li>
                                 <li><a href="#">Работодателям</a></li>
                             </ul>
                         </nav>

@@ -5,25 +5,68 @@ import {logIn} from '@career/acs/auth';
 import Aside from '@career/components/common/Aside';
 import styles from './index.module.css';
 import sortIkon from '@career/assets/img/system/sort-ikon.svg';
-import starGreen from '@career/assets/img/system/star-green.svg';
-import star50 from '@career/assets/img/system/star-50.svg';
-import starGrey from '@career/assets/img/system/star-grey.svg';
 import sberIkon from '@career/assets/img/companies/sber-ikon.svg';
 import cityIkon from '@career/assets/img/system/city-ikon.svg';
 import classNames from "classnames";
+import {getAllCompanies} from '@career/services/api';
+import {notifyError} from '@career/services/notifications';
+import Rating from "@career/components/common/Rating";
 
 
 class Companies extends PureComponent {
 
     constructor(props) {
+        debugger
         super(props);
+        this.state = {
+            allCompanies: []
+        }
+    }
+
+    componentDidMount() {
+        this.loadData();
+    }
+
+    loadData = () => {
+        debugger
+        getAllCompanies(100, 1)
+            .then(allCompanies => {
+                this.setState({
+                    allCompanies: allCompanies,
+                });
+            })
+            .catch(error => notifyError(error.message));
+    };
+
+    renderCompanyItem(company) {
+        return  <div className={styles.item}>
+            <div className={styles.company}>
+                <div className={styles.logo}><img src={sberIkon}/></div>
+                <div className={styles.info}>
+                    <p className={styles.name}>{company.name}</p>
+                    <p className={styles.service}></p>
+                </div>
+            </div>
+
+            <div className={styles.rating}>
+                <Rating rating={company.averageCommonScale}/>
+            </div>
+            <div className={styles.city}><img src={cityIkon}/><span>Москва</span></div>
+            <div className={styles.reviews}>
+                <p>Отзывы:</p>
+                <div><span><a href="#">О компании</a><a href="#">24</a></span><span><a href="#">Об отборе</a><a
+                    href="#">37</a></span><span><a href="#">О зарплате</a><a href="#">15</a></span>
+                </div>
+            </div>
+            <div className={styles.addReview}>
+                <button className={classNames(styles.btn, styles.btnBorder)}>Оставить отзыв</button>
+            </div>
+        </div>
     }
 
     render() {
-        const btnBorderClName = classNames(styles.btn, styles.btnBorder);
-        const rootAllCompaniesClName = classNames(styles.allCompanies, styles.root);
         return (
-            <main className={rootAllCompaniesClName}>
+            <main className={classNames(styles.allCompanies, styles.root)}>
                 <div className={styles.container}>
                     <div className={styles.content}>
                         <h1>Все компании</h1>
@@ -32,58 +75,11 @@ class Companies extends PureComponent {
                             href="#"><span>Сортировать</span> <img src={sortIkon}/></a>
                         </div>
                         <div className={styles.allCompaniesContainer}>
-                            <div className={styles.item}>
-                                <div className={styles.company}>
-                                    <div className={styles.logo}><img src={sberIkon}/></div>
-                                    <div className={styles.info}>
-                                        <p className={styles.name}>Сбербанк</p>
-                                        <p className={styles.service}>Банковские услуги частным клиентам.</p>
-                                    </div>
-                                </div>
-                                <div className={styles.rating}>
-                                    <div className={styles.stars}><img src={starGreen}/><img
-                                        src={starGreen}/><img src={star50}/><img
-                                        src={starGrey}/><img src={starGrey}/>
-                                    </div>
-                                    <span>2.4</span>
-                                </div>
-                                <div className={styles.city}><img src={cityIkon}/><span>Москва</span></div>
-                                <div className={styles.reviews}>
-                                    <p>Отзывы:</p>
-                                    <div><span><a href="#">О компании</a><a href="#">24</a></span><span><a href="#">Об отборе</a><a
-                                        href="#">37</a></span><span><a href="#">О зарплате</a><a href="#">15</a></span>
-                                    </div>
-                                </div>
-                                <div className={styles.addReview}>
-                                    <button className={btnBorderClName}>Оставить отзыв</button>
-                                </div>
-                            </div>
-                            <div className={styles.item}>
-                                <div className={styles.company}>
-                                    <div className={styles.logo}><img src={sberIkon}/></div>
-                                    <div className={styles.info}>
-                                        <p className={styles.name}>Сбербанк</p>
-                                        <p className={styles.service}>Банковские услуги частным клиентам.</p>
-                                    </div>
-                                </div>
-                                <div className={styles.rating}>
-                                    <div className={styles.stars}><img src={starGreen}/><img
-                                        src={starGreen}/><img src={star50}/><img
-                                        src={starGrey}/><img src={starGrey}/>
-                                    </div>
-                                    <span>2.4</span>
-                                </div>
-                                <div className={styles.city}><img src={cityIkon}/><span>Москва</span></div>
-                                <div className={styles.reviews}>
-                                    <p>Отзывы:</p>
-                                    <div><span><a href="#">О компании</a><a href="#">24</a></span><span><a href="#">Об отборе</a><a
-                                        href="#">37</a></span><span><a href="#">О зарплате</a><a href="#">15</a></span>
-                                    </div>
-                                </div>
-                                <div className={styles.addReview}>
-                                    <button className={btnBorderClName}>Оставить отзыв</button>
-                                </div>
-                            </div>
+                            {
+                                this.state.allCompanies.map(company => {
+                                    return this.renderCompanyItem(company);
+                                })
+                            }
                             <a href="#">Загрузить еще</a>
                             <div className={styles.pagination}>
                                 <ul>

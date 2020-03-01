@@ -18,7 +18,12 @@ class AboutCompanyCard extends PureComponent {
         return "item-company";
     }
 
+    calcWidth(rating) {
+        return (rating / 5 * 100) + "%";
+    }
+
     render() {
+        const width = {width: 50 };
         return (
             <div hidden={this.props.selectedTabId !== AboutCompanyCard.getTabId()}>
                 <div className={styles.cardContainer}>
@@ -53,39 +58,39 @@ class AboutCompanyCard extends PureComponent {
                             <div className={styles.city}><img src={cityIkon}/><span>Москва</span>
                             </div>
                             <div className={styles.dataLines}>
-                                <div className={classNames(styles.item, styles.salary)}>
-                                    <div className={styles.line}>
-                                        <div></div>
+                                <div className={classNames(styles.item, styles.salary)} >
+                                    <div className={styles.line} >
+                                        <div style={{width: this.calcWidth(this.props.company.averageSalaryScale)}}></div>
                                     </div>
-                                    <span>4.3</span>
+                                    <span>{Number((this.props.company.averageSalaryScale).toFixed(1))}</span>
                                     <p>Зарплата и соцпакет</p>
                                 </div>
                                 <div className={classNames(styles.item, styles.boss)}>
                                     <div className={styles.line}>
-                                        <div></div>
+                                        <div  style={{width: this.calcWidth(this.props.company.averageLeadershipScale)}}></div>
                                     </div>
-                                    <span>3.5</span>
+                                    <span>{Number((this.props.company.averageLeadershipScale).toFixed(1))}</span>
                                     <p>Руководство</p>
                                 </div>
                                 <div className={classNames(styles.item, styles.career)}>
                                     <div className={styles.line}>
-                                        <div></div>
+                                        <div  style={{width: this.calcWidth(this.props.company.averageCareerScale)}}></div>
                                     </div>
-                                    <span>4.8</span>
+                                    <span>{Number((this.props.company.averageCareerScale).toFixed(1))}</span>
                                     <p>Карьерные возможности</p>
                                 </div>
                                 <div className={classNames(styles.item, styles.culture)}>
                                     <div className={styles.line}>
-                                        <div></div>
+                                        <div  style={{width: this.calcWidth(this.props.company.averageCultureScale)}}></div>
                                     </div>
-                                    <span>0.5</span>
+                                    <span>{Number((this.props.company.averageCultureScale).toFixed(1))}</span>
                                     <p>Культуры и ценности</p>
                                 </div>
                                 <div className={classNames(styles.item, styles.balance)}>
                                     <div className={styles.line}>
-                                        <div></div>
+                                        <div  style={{width: this.calcWidth(this.props.company.averageBalanceScale)}}></div>
                                     </div>
-                                    <span>2.5</span>
+                                    <span>{Number((this.props.company.averageBalanceScale).toFixed(1))}</span>
                                     <p>Баланс работы и жизни</p>
                                 </div>
                             </div>
@@ -95,7 +100,7 @@ class AboutCompanyCard extends PureComponent {
                         </div>
                     </div>
                 </div>
-                {<AboutCompanyReview/>}
+                {<AboutCompanyReview idCompany={this.props.company.id}/>}
             </div>
         );
     }

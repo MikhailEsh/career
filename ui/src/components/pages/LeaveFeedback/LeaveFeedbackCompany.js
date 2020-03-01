@@ -3,23 +3,12 @@ import {withRouter} from 'react-router-dom';
 import {connect} from 'react-redux';
 import {logIn} from '@career/acs/auth';
 import styles from './index.module.css';
-import Typography from "@material-ui/core/Typography";
-import Box from '@material-ui/core/Box';
-import AutosuggestCompany from '@career/components/common/AutosuggestCompany';
-import TextField from '@material-ui/core/TextField';
-import Grid from "@material-ui/core/Grid";
-import Paper from "@material-ui/core/Paper";
-import Rating from '@material-ui/lab/Rating';
 import classNames from "classnames";
 import starGreen from "@career/assets/img/system/star-green.svg";
 import starGrey from "@career/assets/img/system/star-grey.svg";
 
 
 class LeaveFeedbackCompany extends PureComponent {
-
-    constructor(props) {
-        super(props);
-    }
 
     static getTabId() {
         return "leave-feedback-company";

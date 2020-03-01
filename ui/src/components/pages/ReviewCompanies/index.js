@@ -9,19 +9,36 @@ import AboutSalary from './AboutSalary'
 import AboutPhotos from './AboutPhotos'
 import AboutInterview from './AboutInterview'
 import sberIkon from "@career/assets/img/companies/sber-ikon.svg";
-import starGreen from "@career/assets/img/system/star-green.svg";
-import star50 from "@career/assets/img/system/star-50.svg";
-import starGrey from "@career/assets/img/system/star-grey.svg";
 import Aside from '@career/components/common/Aside';
+import {getCompanyById} from '@career/services/api';
+import {NOT_LOADED} from '@career/constants/state';
+import {notifyError} from '@career/services/notifications';
+import Rating from "@career/components/common/Rating";
 
 class ReviewCompanies extends PureComponent {
 
     constructor(props) {
         super(props);
         this.state = {
-            selectedTabId: AboutCompanyCard.getTabId()
+            selectedTabId: AboutCompanyCard.getTabId(),
+            idCompany: this.props.match.params.id,
+            company: NOT_LOADED
         }
     }
+
+    componentDidMount() {
+        this.loadData();
+    }
+
+    loadData = () => {
+        getCompanyById(this.state.idCompany)
+            .then(company => {
+                this.setState({
+                    company: company,
+                });
+            })
+            .catch(error => notifyError(error.message));
+    };
 
     onClickTab(e) {
         e.preventDefault();
@@ -40,52 +57,52 @@ class ReviewCompanies extends PureComponent {
     }
 
     render() {
-        return (
-            <div className={styles.root}>
-                <main className={styles.company}>
-                    <div className={styles.container}>
-                        <div className={styles.breadcrambs}><a href="#"><img src={breadcrambArrow}/><span>Вернуться к списку компаний</span></a>
-                            <p>В нашей базе свыше 1280 компаний</p>
-                        </div>
-                        <div className={styles.content}>
-                            <div className={styles.card}>
-                                <div className={styles.header}>
-                                    <div className={styles.company}>
-                                        <div className={styles.logo}><img src={sberIkon}/></div>
-                                        <div className={styles.info}>
-                                            <p className={styles.name}>Сбербанк</p>
-                                            <p className={styles.service}>Банковские услуги частным клиентам.</p>
+        if (this.state.company !== NOT_LOADED) {
+            return (
+                <div className={styles.root}>
+                    <main className={styles.company}>
+                        <div className={styles.container}>
+                            <div className={styles.breadcrambs}><a href="#"><img src={breadcrambArrow}/><span>Вернуться к списку компаний</span></a>
+                                <p>В нашей базе свыше 1280 компаний</p>
+                            </div>
+                            <div className={styles.content}>
+                                <div className={styles.card}>
+                                    <div className={styles.header}>
+                                        <div className={styles.company}>
+                                            <div className={styles.logo}><img src={sberIkon}/></div>
+                                            <div className={styles.info}>
+                                                <p className={styles.name}>{this.state.company.name}</p>
+                                                <p className={styles.service}>Банковские услуги частным клиентам.</p>
+                                            </div>
+                                        </div>
+                                        <div className={styles.rating}>
+                                            <Rating rating={this.state.company.averageCommonScale}/>
+                                        </div>
+                                        <div className={styles.tabs} onClick={(e) => this.onClickTab(e)}>
+                                            <ul>
+                                                <li className={this.classOfTab(AboutCompanyCard.getTabId())}><a href="#" id={AboutCompanyCard.getTabId()}>О
+                                                    компании <span>({this.state.company.countCompanyReview})</span></a></li>
+                                                <li className={this.classOfTab(AboutSalary.getTabId())}><a href="#" id={AboutSalary.getTabId()}>О зарплате <span>({this.state.company.countSalaryReview})</span></a>
+                                                </li>
+                                                <li className={this.classOfTab(AboutInterview.getTabId())}><a href="#" id={AboutInterview.getTabId()}>Об
+                                                    отборе <span>({this.state.company.countSelectionReview})</span></a></li>
+                                                <li className={this.classOfTab(AboutPhotos.getTabId())}><a href="#" id={AboutPhotos.getTabId()}>Фото</a></li>
+                                            </ul>
                                         </div>
                                     </div>
-                                    <div className={styles.rating}>
-                                        <div className="stars"><img src={starGreen}/><img
-                                            src={starGreen}/><img src={star50}/><img
-                                            src={starGrey}/><img src={starGrey}/></div>
-                                        <span>2.4</span>
-                                    </div>
-                                    <div className={styles.tabs} onClick={(e) => this.onClickTab(e)}>
-                                        <ul>
-                                            <li className={this.classOfTab(AboutCompanyCard.getTabId())}><a href="#" id={AboutCompanyCard.getTabId()}>О
-                                                компании <span>(24)</span></a></li>
-                                            <li className={this.classOfTab(AboutSalary.getTabId())}><a href="#" id={AboutSalary.getTabId()}>О зарплате <span>(4)</span></a>
-                                            </li>
-                                            <li className={this.classOfTab(AboutInterview.getTabId())}><a href="#" id={AboutInterview.getTabId()}>Об
-                                                отборе <span>(10)</span></a></li>
-                                            <li className={this.classOfTab(AboutPhotos.getTabId())}><a href="#" id={AboutPhotos.getTabId()}>Фото</a></li>
-                                        </ul>
-                                    </div>
                                 </div>
+                                {<AboutCompanyCard selectedTabId = {this.state.selectedTabId} company={this.state.company}/>}
+                                {<AboutSalary selectedTabId = {this.state.selectedTabId}  company={this.state.company}/>}
+                                {<AboutInterview selectedTabId = {this.state.selectedTabId}/>}
+                                {<AboutPhotos selectedTabId = {this.state.selectedTabId}/>}
                             </div>
-                            {<AboutCompanyCard selectedTabId = {this.state.selectedTabId}/>}
-                            {<AboutSalary selectedTabId = {this.state.selectedTabId}/>}
-                            {<AboutInterview selectedTabId = {this.state.selectedTabId}/>}
-                            {<AboutPhotos selectedTabId = {this.state.selectedTabId}/>}
+                            {<Aside/>}
                         </div>
-                        {<Aside/>}
-                    </div>
-                </main>
-            </div>
-        );
+                    </main>
+                </div>
+            );
+        } else return "";
+
     }
 }
 

@@ -610,27 +610,28 @@ main.company .login {
 .dataLines .salary .line {
     background: #E6FBEE; }
 .dataLines .salary .line div {
-    width: 74%;
+    /*width: 74%;*/
     background: #01DB55; }
 .dataLines .boss .line {
     background: #E2CEE2; }
 .dataLines .boss .line div {
-    width: 63%;
+    /*width: 63%;*/
     background: #C800CC; }
 .dataLines .career .line {
     background: #CEE2E1; }
 .dataLines .career .line div {
-    width: 94%;
+    /*width: 94%;*/
     background: #00CCC0; }
 .dataLines .culture .line {
+
     background: #E2DFCE; }
 .dataLines .culture .line div {
-    width: 20%;
+    /*width: 20%;*/
     background: #CCAB00; }
 .dataLines .balance .line {
     background: #CED9E2; }
 .dataLines .balance .line div {
-    width: 50%;
+    /*width: 50%;*/
     background: #0066CC; }
 
 @media (min-width: 1024px) {

@@ -9,10 +9,6 @@ import markIkon from "@career/assets/img/system/mark-ikon.svg";
 
 class AboutInterview extends PureComponent {
 
-    constructor(props) {
-        super(props);
-    }
-
     static getTabId() {
         return "item-review";
     }
