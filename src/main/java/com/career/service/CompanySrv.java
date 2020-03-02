@@ -47,50 +47,75 @@ public class CompanySrv {
         if (company.getReviewCompanyEntities().size() != 0) {
             List<ReviewCompanyEntity> reviews = company.getReviewCompanyEntities().stream()
                     .filter(ReviewCompanyEntity::getIsApproved).collect(Collectors.toList());
-            double count = (double) reviews.size();//todo maybe need refactoring
+            double countCompanyReview = (double) reviews.size();//todo maybe need refactoring
             company.setAverageBalanceScale((reviews.stream().filter(f -> f.getBalanceWorkHomeScale() != null)
-                    .mapToInt(ReviewCompanyEntity::getBalanceWorkHomeScale).sum() / count));
+                    .mapToInt(ReviewCompanyEntity::getBalanceWorkHomeScale).sum() / countCompanyReview));
             company.setAverageCareerScale((reviews.stream().filter(f -> f.getCareerScale() != null)
-                    .mapToInt(ReviewCompanyEntity::getCareerScale).sum() / count));
+                    .mapToInt(ReviewCompanyEntity::getCareerScale).sum() / countCompanyReview));
             company.setAverageCultureScale((reviews.stream().filter(f -> f.getCultureScale() != null)
-                    .mapToInt(ReviewCompanyEntity::getCultureScale).sum() / count));
+                    .mapToInt(ReviewCompanyEntity::getCultureScale).sum() / countCompanyReview));
             company.setAverageLeadershipScale((reviews.stream().filter(f -> f.getLeadershipScale() != null)
-                    .mapToInt(ReviewCompanyEntity::getLeadershipScale).sum() / count));
+                    .mapToInt(ReviewCompanyEntity::getLeadershipScale).sum() / countCompanyReview));
             company.setAverageSalaryScale((reviews.stream().filter(f -> f.getSalaryScale() != null)
-                    .mapToInt(ReviewCompanyEntity::getSalaryScale).sum() / count));
+                    .mapToInt(ReviewCompanyEntity::getSalaryScale).sum() / countCompanyReview));
             company.setAverageCommonScale((reviews.stream().filter(f -> f.getCommonScale() != null)
-                    .mapToInt(ReviewCompanyEntity::getCommonScale).sum() / count));
+                    .mapToInt(ReviewCompanyEntity::getCommonScale).sum() / countCompanyReview));
 
-            List<ReviewSelectionEntity> selectionReviews = company.getReviewSelectionEntities().stream()
-                    .filter(ReviewSelectionEntity::getIsApproved).collect(Collectors.toList());
-            company.setAverageSelectionDifficultScale((selectionReviews.stream().filter(f -> f.getDifficult() != null)
-                    .mapToInt(ReviewSelectionEntity::getDifficult).sum() / count));
+            int countSelectionReview = company.getReviewSelectionEntities().size();//todo maybe need refactoring
+            if (countSelectionReview != 0) {
+                List<ReviewSelectionEntity> selectionReviews = company.getReviewSelectionEntities().stream()
+                        .filter(ReviewSelectionEntity::getIsApproved).collect(Collectors.toList());
+                company.setAverageSelectionDifficultScale((selectionReviews.stream().filter(f -> f.getDifficult() != null)
+                        .mapToInt(ReviewSelectionEntity::getDifficult).sum() / Double.valueOf(countSelectionReview)));
 
-            company.setHowToGetSelection0Count(company.getReviewSelectionEntities().stream()
-                    .filter(ReviewSelectionEntity::getIsApproved)
-                    .filter(f -> f.getHowGetInterview() == HowToGetIntervew.RESPONDED_ONLINE).count());
-            company.setHowToGetSelection1Count(company.getReviewSelectionEntities().stream()
-                    .filter(ReviewSelectionEntity::getIsApproved)
-                    .filter(f -> f.getHowGetInterview() == HowToGetIntervew.CAREER_EVENT).count());
-            company.setHowToGetSelection2Count(company.getReviewSelectionEntities().stream()
-                    .filter(ReviewSelectionEntity::getIsApproved)
-                    .filter(f -> f.getHowGetInterview() == HowToGetIntervew.INVITED_COWORKER_OF_THE_COMPANY).count());
-            company.setHowToGetSelection3Count(company.getReviewSelectionEntities().stream()
-                    .filter(ReviewSelectionEntity::getIsApproved)
-                    .filter(f -> f.getHowGetInterview() == HowToGetIntervew.THROUGH_THE_AGENCY).count());
-            company.setHowToGetSelection4Count(company.getReviewSelectionEntities().stream()
-                    .filter(ReviewSelectionEntity::getIsApproved)
-                    .filter(f -> f.getHowGetInterview() == HowToGetIntervew.OTHER).count());
+                Long respondedOnlinePercent = company.getReviewSelectionEntities().stream()
+                        .filter(ReviewSelectionEntity::getIsApproved)
+                        .filter(f -> f.getHowGetInterview() == HowToGetIntervew.RESPONDED_ONLINE)
+                        .count() * 100 / countSelectionReview;
+                Long careerEventPercent = company.getReviewSelectionEntities().stream()
+                        .filter(ReviewSelectionEntity::getIsApproved)
+                        .filter(f -> f.getHowGetInterview() == HowToGetIntervew.CAREER_EVENT)
+                        .count() * 100 / countSelectionReview;
+                Long invitedCoworkerOfTheCompanyPercent = company.getReviewSelectionEntities().stream()
+                        .filter(ReviewSelectionEntity::getIsApproved)
+                        .filter(f -> f.getHowGetInterview() == HowToGetIntervew.INVITED_COWORKER_OF_THE_COMPANY)
+                        .count() * 100 / countSelectionReview;
+                Long throughTheAgencyPercent = company.getReviewSelectionEntities().stream()
+                        .filter(ReviewSelectionEntity::getIsApproved)
+                        .filter(f -> f.getHowGetInterview() == HowToGetIntervew.THROUGH_THE_AGENCY)
+                        .count() * 100 / countSelectionReview;
+                Long otherPercent=100L-(respondedOnlinePercent+careerEventPercent
+                        +invitedCoworkerOfTheCompanyPercent+throughTheAgencyPercent);
 
-            company.setUseful0Count(company.getReviewSelectionEntities().stream()
-                    .filter(ReviewSelectionEntity::getIsApproved)
-                    .filter(f -> f.getUseful() == 0).count());
-            company.setUseful1Count(company.getReviewSelectionEntities().stream()
-                    .filter(ReviewSelectionEntity::getIsApproved)
-                    .filter(f -> f.getUseful() == 1).count());
-            company.setUseful2Count(company.getReviewSelectionEntities().stream()
-                    .filter(ReviewSelectionEntity::getIsApproved)
-                    .filter(f -> f.getUseful() == 2).count());
+                company.setHowToGetSelectionRespondedOnlinepercent(respondedOnlinePercent);
+                company.setHowToGetSelectionCareerEventPercent(careerEventPercent);
+                company.setHowToGetSelectionInvitedCoworkerOfTheCompanyPercent(invitedCoworkerOfTheCompanyPercent);
+                company.setHowToGetSelectionThroughTheAgencyPercent(throughTheAgencyPercent);
+                company.setHowToGetSelectionOtherPercent(otherPercent);
+
+                Long usefulGoodPercent = company.getReviewSelectionEntities().stream()
+                        .filter(ReviewSelectionEntity::getIsApproved)
+                        .filter(f -> f.getUseful() == 2).count() * 100 / countSelectionReview;
+                Long usefulBadPercent = company.getReviewSelectionEntities().stream()
+                        .filter(ReviewSelectionEntity::getIsApproved)
+                        .filter(f -> f.getUseful() == 0).count() * 100 / countSelectionReview;
+                Long usefulNeutralPercent =100L - (usefulBadPercent + usefulGoodPercent);
+
+                company.setUsefulBadPercent(usefulBadPercent);
+                company.setUsefulGoodPercent(usefulGoodPercent);
+                company.setUsefulNeutralPercent(usefulNeutralPercent);
+
+
+            } else {
+                company.setHowToGetSelectionRespondedOnlinepercent(0L);
+                company.setHowToGetSelectionOtherPercent(0L);
+                company.setHowToGetSelectionThroughTheAgencyPercent(0L);
+                company.setHowToGetSelectionInvitedCoworkerOfTheCompanyPercent(0L);
+                company.setHowToGetSelectionCareerEventPercent(0L);
+                company.setUsefulBadPercent(0L);
+                company.setUsefulNeutralPercent(0L);
+                company.setUsefulGoodPercent(0L);
+            }
         }
     }
 }
