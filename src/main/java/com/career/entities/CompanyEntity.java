@@ -41,22 +41,22 @@ public class CompanyEntity implements GQLEntity {
     private Double averageBalanceScale;
     @Column(name = "average_selection_difficult_scale")
     private Double averageSelectionDifficultScale;
-    @Column(name = "how_to_get_selection_0_count")
-    private Long howToGetSelection0Count;
-    @Column(name = "how_to_get_selection_1_count")
-    private Long howToGetSelection1Count;
-    @Column(name = "how_to_get_selection_2_count")
-    private Long howToGetSelection2Count;
-    @Column(name = "how_to_get_selection_3_count")
-    private Long howToGetSelection3Count;
-    @Column(name = "how_to_get_selection_4_count")
-    private Long howToGetSelection4Count;
-    @Column(name = "useful_0_count")
-    private Long useful0Count;
-    @Column(name = "useful_1_count")
-    private Long useful1Count;
-    @Column(name = "useful_2_count")
-    private Long useful2Count;
+    @Column(name = "how_to_get_selection_responded_online_percent")
+    private Long howToGetSelectionRespondedOnlinepercent;
+    @Column(name = "how_to_get_selection_career_event_percent")
+    private Long howToGetSelectionCareerEventPercent;
+    @Column(name = "how_to_get_selection_invited_coworker_of_the_company_percent")
+    private Long howToGetSelectionInvitedCoworkerOfTheCompanyPercent;
+    @Column(name = "how_to_get_selection_through_the_agency_percent")
+    private Long howToGetSelectionThroughTheAgencyPercent;
+    @Column(name = "how_to_get_selection_other_percent")
+    private Long howToGetSelectionOtherPercent;
+    @Column(name = "useful_bad_percent")
+    private Long usefulBadPercent;
+    @Column(name = "useful_neutral_percent")
+    private Long usefulNeutralPercent;
+    @Column(name = "useful_good_percent")
+    private Long usefulGoodPercent;
 
 
     @Override
