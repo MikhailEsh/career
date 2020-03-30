@@ -17,7 +17,6 @@ class LeaveFeedback extends PureComponent {
     }
 
     onClickTab(e) {
-        debugger
         e.preventDefault();
         const  tabId = e.target.id;
         if (tabId !== undefined && tabId !== "") {

@@ -334,7 +334,6 @@ h2 {
 
 /*!*все что выше это обшая часть, пока буду ее копировать потом разберусь как правильно*!*/
 
-
 main.feedback {
     padding: 32px 0 53px; }
 main.feedback .reminder {
@@ -400,7 +399,7 @@ main.feedback .search-company {
     font-weight: bold; }
 .feedbackContainer .itemContainer.about {
     margin-top: 32px; }
-.feedbackContainer input[type=text] {
+.feedbackContainer input[type=text], input[type=number]  {
     width: 100%;
     height: 48px;
     border-radius: 4px;
@@ -410,11 +409,11 @@ main.feedback .search-company {
     margin-bottom: 16px;
     color: #2B2B33;
     transition: all .3s; }
-.feedbackContainer input[type=text]::placeholder {
+.feedbackContainer input[type=text]::placeholder, input[type=number]::placeholder {
     color: #AEAEAE; }
-.feedbackContainer input[type=text]:last-child {
+.feedbackContainer input[type=text]:last-child, input[type=number]:last-child {
     margin-bottom: 0; }
-.feedbackContainer input[type=text]:focus {
+.feedbackContainer input[type=text]:focus, input[type=number]:focus {
     border-color: #01DB55; }
 .feedbackContainer textarea {
     height: 69px;
@@ -469,7 +468,7 @@ main.feedback .search-company {
         margin-bottom: 0; }
     .feedbackContainer textarea {
         margin-bottom: 0; }
-    .feedbackContainer input[type=text] {
+    .feedbackContainer input[type=text], input[type=number] {
         margin-bottom: 0; } }
 
 .content {
@@ -630,18 +629,46 @@ main.feedback .search-company {
 .btnGreen {
     background-color: #01DB55; }
 
+.company {
+    grid-area: company;
+}
+.jobTitle {
+    grid-area: jobTitle;
+}
+.howGetInterview {
+    grid-area: howGetInterview;
+}
+.dateInterview {
+    grid-area: dateInterview;
+}
+
 .processSelection {
     margin-top: 36px; }
 
 @media (min-width: 1024px) {
     .processSelection {
         display: grid;
+        grid-template-areas: "company company"
+        "jobTitle jobTitle"
+        "howGetInterview dateInterview";
+        grid-column-gap: 24px;
+        grid-row-gap: 16px; }
+
+}
+
+.processSelectionWithFirstOverview {
+    margin-top: 36px; }
+
+@media (min-width: 1024px) {
+    .processSelectionWithFirstOverview {
+        display: grid;
         grid-template-columns: repeat(2, 1fr);
         grid-column-gap: 24px;
         grid-row-gap: 16px; }
-    .processSelection > *:first-child {
+    .processSelectionWithFirstOverview > *:first-child {
         grid-column-start: 1;
-        grid-column-end: 3; } }
+        grid-column-end: 3; }
+}
 
 .stagesSelection {
     margin-top: 24px;
@@ -717,6 +744,7 @@ main.feedback .search-company {
     color: rgba(0, 0, 0, 0.4);
     font-size: .875em; }
 .impression button.active {
+    border: 0.5px solid black;
     color: #2B2B33; }
 .impression .neutrally {
     background: #f8f5e0; }
@@ -728,6 +756,10 @@ main.feedback .search-company {
         grid-template-columns: repeat(3, 160px); }
     .impression button {
         border-radius: 0px; }
+    .impression button.active {
+        border: 0.5px solid black;
+        border-radius: 4px 0 0 4px;
+    }
     .impression button.positive {
         border-radius: 4px 0 0 4px; }
     .impression button.negatively {
@@ -752,4 +784,8 @@ main.feedback .search-company {
     border-radius: 0 4px 4px 0;
     border-left: none;
     color: #f2c7c7; }
+
+.proposal .choise button.active {
+    border: 0.5px solid black;
+}
 

@@ -31,23 +31,23 @@ class AboutInterview extends PureComponent {
                                         <ul>
                                             <li className={styles.purple}>
                                                 <div></div>
-                                                <p>Откликнулся онлайн</p><span>14%</span>
+                                                <p>Откликнулся онлайн</p><span>{this.props.company.howToGetSelectionRespondedOnlinepercent}%</span>
                                             </li>
                                             <li className={styles.lightBlue}>
                                                 <div></div>
-                                                <p>По рекоммендации</p><span>26%</span>
+                                                <p>По рекоммендации</p><span>{this.props.company.howToGetSelectionInvitedCoworkerOfTheCompanyPercent}%</span>
                                             </li>
                                             <li className={styles.green}>
                                                 <div></div>
-                                                <p>Через агенство</p><span>10%</span>
+                                                <p>Через агенство</p><span>{this.props.company.howToGetSelectionThroughTheAgencyPercent}%</span>
                                             </li>
                                             <li className={styles.blue}>
                                                 <div></div>
-                                                <p>Узнал на ярмарке вакансий</p><span>25%</span>
+                                                <p>Узнал на ярмарке вакансий</p><span>{this.props.company.howToGetSelectionCareerEventPercent}%</span>
                                             </li>
                                             <li className={styles.grey}>
                                                 <div></div>
-                                                <p>Другое</p><span>25%</span>
+                                                <p>Другое</p><span>{this.props.company.howToGetSelectionOtherPercent}%</span>
                                             </li>
                                         </ul>
                                     </div>
@@ -59,15 +59,15 @@ class AboutInterview extends PureComponent {
                                         <ul>
                                             <li className={styles.green}>
                                                 <div></div>
-                                                <p>Положительное</p><span>56%</span>
+                                                <p>Положительное</p><span>{this.props.company.usefulGoodPercent}%</span>
                                             </li>
                                             <li className={styles.yellow}>
                                                 <div></div>
-                                                <p>Нейтральное</p><span>13%</span>
+                                                <p>Нейтральное</p><span>{this.props.company.usefulNeutralPercent}%</span>
                                             </li>
                                             <li className={styles.red}>
                                                 <div></div>
-                                                <p>Отрицательное</p><span>31%</span>
+                                                <p>Отрицательное</p><span>{this.props.company.usefulBadPercent}%</span>
                                             </li>
                                         </ul>
                                     </div>

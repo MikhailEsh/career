@@ -12,6 +12,7 @@ import sberIkon from "@career/assets/img/companies/sber-ikon.svg";
 import Aside from '@career/components/common/Aside';
 import {getCompanyById} from '@career/services/api';
 import {NOT_LOADED} from '@career/constants/state';
+import {COMPANIES} from '@career/constants/routes';
 import {notifyError} from '@career/services/notifications';
 import Rating from "@career/components/common/Rating";
 
@@ -62,7 +63,7 @@ class ReviewCompanies extends PureComponent {
                 <div className={styles.root}>
                     <main className={styles.company}>
                         <div className={styles.container}>
-                            <div className={styles.breadcrambs}><a href="#"><img src={breadcrambArrow}/><span>Вернуться к списку компаний</span></a>
+                            <div className={styles.breadcrambs}><a href={COMPANIES}><img src={breadcrambArrow}/><span>Вернуться к списку компаний</span></a>
                                 <p>В нашей базе свыше 1280 компаний</p>
                             </div>
                             <div className={styles.content}>
@@ -93,7 +94,7 @@ class ReviewCompanies extends PureComponent {
                                 </div>
                                 {<AboutCompanyCard selectedTabId = {this.state.selectedTabId} company={this.state.company}/>}
                                 {<AboutSalary selectedTabId = {this.state.selectedTabId}  company={this.state.company}/>}
-                                {<AboutInterview selectedTabId = {this.state.selectedTabId}/>}
+                                {<AboutInterview selectedTabId = {this.state.selectedTabId}  company={this.state.company}/>}
                                 {<AboutPhotos selectedTabId = {this.state.selectedTabId}/>}
                             </div>
                             {<Aside/>}

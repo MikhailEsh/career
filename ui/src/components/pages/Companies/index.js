@@ -11,12 +11,14 @@ import classNames from "classnames";
 import {getAllCompanies} from '@career/services/api';
 import {notifyError} from '@career/services/notifications';
 import Rating from "@career/components/common/Rating";
+import {REVIEWCOMPANIES, LEAVEFEEDBACK} from '@career/constants/routes';
+
+const btnFeedBack = "btnFeedBack";
 
 
 class Companies extends PureComponent {
 
     constructor(props) {
-        debugger
         super(props);
         this.state = {
             allCompanies: []
@@ -28,7 +30,6 @@ class Companies extends PureComponent {
     }
 
     loadData = () => {
-        debugger
         getAllCompanies(100, 1)
             .then(allCompanies => {
                 this.setState({
@@ -38,8 +39,32 @@ class Companies extends PureComponent {
             .catch(error => notifyError(error.message));
     };
 
+    openPageCompany = ev => {
+        ev.preventDefault();
+        const {history} = this.props;
+        if (ev.currentTarget && ev.currentTarget.name !== btnFeedBack) {
+            const urlId = ev.currentTarget.id;
+            const name = ev.currentTarget.name;
+            history.push(REVIEWCOMPANIES.replace(':id', urlId));
+        }
+    };
+
+    openPageFeedBack = ev => {
+        ev.preventDefault();
+        ev.stopPropagation();
+        const {history} = this.props;
+        if (ev.currentTarget) {
+            const urlId = ev.currentTarget.id;
+            history.push(LEAVEFEEDBACK);
+        }
+    };
+
     renderCompanyItem(company) {
-        return  <div className={styles.item}>
+        return  <div
+            className={styles.item}
+            id = {company.id}
+            onClick={(e) => this.openPageCompany(e)}
+        >
             <div className={styles.company}>
                 <div className={styles.logo}><img src={sberIkon}/></div>
                 <div className={styles.info}>
@@ -54,12 +79,16 @@ class Companies extends PureComponent {
             <div className={styles.city}><img src={cityIkon}/><span>Москва</span></div>
             <div className={styles.reviews}>
                 <p>Отзывы:</p>
-                <div><span><a href="#">О компании</a><a href="#">24</a></span><span><a href="#">Об отборе</a><a
-                    href="#">37</a></span><span><a href="#">О зарплате</a><a href="#">15</a></span>
+                <div><span><a href="#">О компании</a><a href="#">{company.countCompanyReview}</a></span><span><a href="#">Об отборе</a><a
+                    href="#">{company.countSelectionReview}</a></span><span><a href="#">О зарплате</a><a href="#">{company.countSalaryReview}</a></span>
                 </div>
             </div>
             <div className={styles.addReview}>
-                <button className={classNames(styles.btn, styles.btnBorder)}>Оставить отзыв</button>
+                <button
+                    name = {btnFeedBack}
+                    className={classNames(styles.btn, styles.btnBorder)}
+                    onClick={(e) => this.openPageFeedBack(e)}
+                >Оставить отзыв</button>
             </div>
         </div>
     }

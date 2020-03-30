@@ -37,7 +37,15 @@ export const getCompanyByIdQuery = (id) => ({
       averageLeadershipScale,
       averageCareerScale,
       averageBalanceScale,
-      averageCultureScale
+      averageCultureScale,
+     howToGetSelectionRespondedOnlinepercent,
+      howToGetSelectionCareerEventPercent,
+      howToGetSelectionInvitedCoworkerOfTheCompanyPercent,
+      howToGetSelectionThroughTheAgencyPercent,
+      howToGetSelectionOtherPercent,
+      usefulBadPercent,
+      usefulNeutralPercent,
+      usefulGoodPercent
     }
   }
   `,

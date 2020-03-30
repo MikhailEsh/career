@@ -6,9 +6,11 @@ import logo from '@career/assets/img/system/logo.svg';
 import logo2 from '@career/assets/img/system/logo2.svg';
 import styles from './index.module.css';
 import {
+    HOME,
     COMPANIES,
     LEAVEFEEDBACK
 } from '@career/constants/routes';
+import {withRouter} from "react-router-dom";
 
 class Header extends PureComponent {
 
@@ -17,12 +19,22 @@ class Header extends PureComponent {
     }
 
     openPage = ev => {
+        ev.preventDefault();
         const {history} = this.props;
         if (ev.currentTarget) {
             const url = ev.currentTarget.name;
             history.push(url);
         }
     };
+
+    getClassName(name) {
+        const pathname = this.props.location.pathname;
+        if ("/" + name === pathname) {
+            return styles.active;
+        } else {
+            return "";
+        }
+    }
 
     render() {
         var logoLocal = logo;
@@ -45,15 +57,26 @@ class Header extends PureComponent {
                     <div className={styles.headerDropdown}>
                         <nav>
                             <ul>
-                                <li className={styles.active}><a href="#">Главная</a></li>
-                                <li><a href="/allcompanies">Все компании</a></li>
-                                <li><a href="#">Работодателям</a></li>
+                                <li className={this.getClassName("home")}><
+                                    a href="#"
+                                      name="home"
+                                      onClick={(e) => this.openPage(e)}>Главная</a></li>
+                                <li className={this.getClassName("companies")}><a
+                                    href="#"
+                                    name="companies"
+                                    onClick={(e) => this.openPage(e)}
+                                >Все компании</a></li>
+                                <li className={this.getClassName("employers")}><a href="#">Работодателям</a></li>
                             </ul>
                         </nav>
                         <div className={styles.account}><a href="#"><img src="./img/user-ikon.svg"/><span>Личный кабинет</span></a>
                         </div>
                         <div className={styles.reviewHeader}>
-                            <button className={classNames(styles.btn, styles.btnGreen)}>Оставить отзыв</button>
+                            <button
+                                name="leavefeedback"
+                                className={classNames(styles.btn, styles.btnGreen)}
+                                onClick={(e) => this.openPage(e)}
+                            >Оставить отзыв</button>
                         </div>
                     </div>
                 </div>
@@ -71,4 +94,4 @@ const mapDispatchToProps = {
 export default connect(
     null,
     mapDispatchToProps
-)((Header));
+)(withRouter(Header));
