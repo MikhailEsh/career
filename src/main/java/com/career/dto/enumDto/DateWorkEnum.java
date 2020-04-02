@@ -16,7 +16,8 @@ public enum DateWorkEnum implements CareerEnum {
     FINISH_2016("FINISH_2016","Finish2016"),
     FINISH_2017("FINISH_2017","Finish2017"),
     FINISH_2018("FINISH_2018","Finish2018"),
-    FINISH_2019("FINISH_2019","Finish2019");
+    FINISH_2019("FINISH_2019","Finish2019"),
+    FINISH_2020("FINISH_2020","Finish2020");
     private CareerEnum.EnumInnerValue ev;
 
     DateWorkEnum(String value, String name) {

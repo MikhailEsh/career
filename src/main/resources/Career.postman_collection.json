@@ -197,99 +197,13 @@
 					}
 				],
 				"body": {
-					"mode": "formdata",
-					"formdata": [
-						{
-							"key": "company_id",
-							"value": "816fb67a-4368-45cf-a80b-5e95f5e4b2b5",
-							"type": "text"
-						},
-						{
-							"key": "name",
-							"value": "test_name",
-							"type": "text"
-						},
-						{
-							"key": "commonScale",
-							"value": "4",
-							"type": "text"
-						},
-						{
-							"key": "salaryScale",
-							"value": "4",
-							"type": "text"
-						},
-						{
-							"key": "leadershipScale",
-							"value": "2",
-							"type": "text"
-						},
-						{
-							"key": "cultureScale",
-							"value": "2",
-							"type": "text"
-						},
-						{
-							"key": "careerScale",
-							"value": "3",
-							"type": "text"
-						},
-						{
-							"key": "balanceWorkHomeScale",
-							"value": "4",
-							"type": "text"
-						},
-						{
-							"key": "recommend",
-							"value": "UNRECOMMEND",
-							"type": "text"
-						},
-						{
-							"key": "plus",
-							"value": "test_plus",
-							"type": "text"
-						},
-						{
-							"key": "minuses",
-							"value": "test_minuses",
-							"type": "text"
-						},
-						{
-							"key": "status",
-							"value": "WORK_NOW",
-							"type": "text"
-						},
-						{
-							"key": "position",
-							"value": "test_position",
-							"type": "text"
-						},
-						{
-							"key": "useful",
-							"value": "0",
-							"type": "text"
-						},
-						{
-							"key": "userId",
-							"value": "94ee963b-8f4d-48ff-9b4f-feef753fd274",
-							"type": "text"
-						},
-						{
-							"key": "dateWork",
-							"value": "BETWEEN_3_4_YEAR",
-							"type": "text"
-						},
-						{
-							"key": "workDepartment",
-							"value": "",
-							"type": "text"
-						},
-						{
-							"key": "managementAdvice",
-							"value": "test_manager_advice",
-							"type": "text"
+					"mode": "raw",
+					"raw": "{\r\n                \"companyId\": \"816fb67a-4368-45cf-a80b-5e95f5e4b2b5\",\r\n                \"companyName\": \"test\",\r\n                \"title\": \"test\",\r\n                \"salaryRubInMonth\": 100500,\r\n                \"commonScale\": 1,\r\n                \"salaryScale\": 1,\r\n                \"leadershipScale\": 1,\r\n                \"cultureScale\": 1,\r\n                \"careerScale\": 1,\r\n                \"balanceWorkHomeScale\": 1,\r\n                \"plus\": \"test\",\r\n                \"minuses\": \"test\",\r\n                \"status\": \"WORK_NOW\",\r\n                \"position\": \"test\",\r\n                \"useful\": 1,\r\n                \"dateWork\": \"LESS_1_YEAR\",\r\n                \"workDepartment\": \"test\",\r\n                \"managementAdvice\": \"test\"\r\n            }\r\n        ",
+					"options": {
+						"raw": {
+							"language": "json"
 						}
-					]
+					}
 				},
 				"url": {
 					"raw": "{{host}}/api/review/common",
@@ -300,73 +214,6 @@
 						"api",
 						"review",
 						"common"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "add_salary_review",
-			"request": {
-				"auth": {
-					"type": "basic",
-					"basic": [
-						{
-							"key": "password",
-							"value": "pass",
-							"type": "string"
-						},
-						{
-							"key": "username",
-							"value": "user",
-							"type": "string"
-						}
-					]
-				},
-				"method": "POST",
-				"header": [
-					{
-						"key": "Content-Type",
-						"name": "Content-Type",
-						"type": "text",
-						"value": "application/x-www-form-urlencoded",
-						"disabled": true
-					}
-				],
-				"body": {
-					"mode": "formdata",
-					"formdata": [
-						{
-							"key": "position",
-							"value": "test_position",
-							"type": "text"
-						},
-						{
-							"key": "salaryrubinmonth",
-							"value": "2",
-							"type": "text"
-						},
-						{
-							"key": "companyId",
-							"value": "816fb67a-4368-45cf-a80b-5e95f5e4b2b5",
-							"type": "text"
-						},
-						{
-							"key": "userId",
-							"value": "94ee963b-8f4d-48ff-9b4f-feef753fd274",
-							"type": "text"
-						}
-					]
-				},
-				"url": {
-					"raw": "{{host}}/api/review/salary",
-					"host": [
-						"{{host}}"
-					],
-					"path": [
-						"api",
-						"review",
-						"salary"
 					]
 				}
 			},
@@ -401,84 +248,13 @@
 					}
 				],
 				"body": {
-					"mode": "formdata",
-					"formdata": [
-						{
-							"key": "select_in",
-							"value": "true",
-							"type": "text"
-						},
-						{
-							"key": "positive_experience",
-							"value": "RECOMMEND",
-							"type": "text"
-						},
-						{
-							"key": "selection_process",
-							"value": "1",
-							"type": "text"
-						},
-						{
-							"key": "how_get_interview",
-							"value": "RESPONDED_ONLINE",
-							"type": "text"
-						},
-						{
-							"key": "date_interview",
-							"value": "2020-01-01",
-							"type": "text"
-						},
-						{
-							"key": "question",
-							"value": "test_question",
-							"type": "text"
-						},
-						{
-							"key": "type_interview",
-							"value": "SKYPE",
-							"type": "text"
-						},
-						{
-							"key": "tests",
-							"value": "SKYPE",
-							"type": "text"
-						},
-						{
-							"key": "difficult",
-							"value": "1",
-							"type": "text"
-						},
-						{
-							"key": "useful",
-							"value": "1",
-							"type": "text"
-						},
-						{
-							"key": "company_id",
-							"value": "816fb67a-4368-45cf-a80b-5e95f5e4b2b5",
-							"type": "text"
-						},
-						{
-							"key": "user_id",
-							"value": "94ee963b-8f4d-48ff-9b4f-feef753fd274",
-							"type": "text"
-						},
-						{
-							"key": "overview",
-							"value": "test_overview",
-							"type": "text"
-						},
-						{
-							"key": "time_taken",
-							"value": "WEEK",
-							"type": "text"
-						},
-						{
-							"key": "review_title",
-							"value": "test_review",
-							"type": "text"
+					"mode": "raw",
+					"raw": " {\r\n\"companyId\": \"816fb67a-4368-45cf-a80b-5e95f5e4b2b5\",\r\n\"companyName\": \"Yandex\",\r\n\"jobTitle\": \"Developer\",\r\n\"selectIn\": true,\r\n\"feedbackGrade\": \"RECOMMEND\",\r\n\"howGetInterview\": \"CAREER_EVENT\",\r\n\"dateInterview\": 2015,\r\n\"typeOfInterview\": [\"SKYPE\", \"OFFLINE\"],\r\n\"difficult\": 0,\r\n\"overview\": \"Попросили спустить штанишки и станцевать\",\r\n\"timeTaken\": \"WEEK\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
 						}
-					]
+					}
 				},
 				"url": {
 					"raw": "{{host}}/api/review/selection",

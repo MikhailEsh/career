@@ -1,5 +1,6 @@
 package com.career.entities;
 
+import com.career.dto.ImportSelectionReviewDto;
 import com.career.dto.enumDto.HowToGetIntervew;
 import com.career.dto.enumDto.RecommendEnum;
 import com.career.dto.enumDto.TimeTakenEnum;
@@ -88,7 +89,7 @@ public class ReviewSelectionEntity implements GQLEntity {
                                  TimeTakenEnum timeTaken,
                                  String reviewTitle,
                                  CompanyEntity company) {
-       this.id=UUID.randomUUID();
+        this.id=UUID.randomUUID();
         this.selectIn = selectIn;
         this.positiveExperience = positiveExperience;
         this.selectionProcess = selectionProcess;
@@ -104,6 +105,28 @@ public class ReviewSelectionEntity implements GQLEntity {
         this.timeTaken = timeTaken;
         this.reviewTitle = reviewTitle;
         this.company = company;
+        this.isApproved =false;
+        this.id=UUID.randomUUID();
+    }
+
+    public ReviewSelectionEntity(ImportSelectionReviewDto feedBack) {
+        this.id=UUID.randomUUID();
+        this.selectIn =feedBack.getSelectIn();
+        this.positiveExperience = RecommendEnum.NEUTRAL;
+        this.selectionProcess = 0;
+        this.howGetInterview =HowToGetIntervew.valueOf(feedBack.getHowGetInterview());
+        this.dateInterview = feedBack.getDateInterview();
+        this.questions = "";
+        this.typeOfInterview = TypeOfInterviewOrTestEnum.valueOf(feedBack.getTypeOfInterview()[0]);
+        this.tests =TypeOfInterviewOrTestEnum.SKILLS;//todo
+        this.difficult = feedBack.getDifficult();
+        this.useful = 1;
+        this.userId = UUID.fromString("94ee963b-8f4d-48ff-9b4f-feef753fd27f");
+//      SecurityConfig.getCurrentUser();todo
+        this.overview = feedBack.getOverview();
+        this.timeTaken = TimeTakenEnum.valueOf(feedBack.getTimeTaken());
+        this.reviewTitle = feedBack.getJobTitle();
+        this.company = new CompanyEntity(feedBack.getCompanyId());
         this.isApproved =false;
         this.id=UUID.randomUUID();
     }
