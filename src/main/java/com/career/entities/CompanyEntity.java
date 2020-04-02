@@ -57,7 +57,18 @@ public class CompanyEntity implements GQLEntity {
     private Long usefulNeutralPercent;
     @Column(name = "useful_good_percent")
     private Long usefulGoodPercent;
-
+    @Column(name = "what_does_the_company_do")
+    private String whatDoesTheCompanyDo;
+    @Column(name = "field_of_activity")
+    private String fieldOfActivity;
+    @Column(name = "city")
+    private String city;
+    @Column(name = "the_number_of_employees")
+    private String theNumberOfEmployees;
+    @Column(name = "site")
+    private String site;
+    @Column(name = "description")
+    private String description;
 
     @Override
     public UUID getId() {

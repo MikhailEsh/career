@@ -1,5 +1,6 @@
 package com.career.entities;
 
+import com.career.dto.ImportCommonReviewDto;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.jraphql.cn.wzvtcsoft.x.bos.domain.GQLEntity;
 import lombok.*;
@@ -25,7 +26,7 @@ public class ReviewSalaryEntity implements Serializable,GQLEntity {
     private UUID id;
     @Column(name = "position")
     private String position;
-    @Column(name = "salaryrubinmonth")
+    @Column(name = "salaryRubInMonth")
     private Integer salaryRubInMonth;
     @Column(name = "user_id")
     private UUID userId;
@@ -40,9 +41,8 @@ public class ReviewSalaryEntity implements Serializable,GQLEntity {
     }
 
     @JsonIgnore
-    @ManyToOne(fetch = FetchType.LAZY, optional = false, cascade = CascadeType.DETACH)
-    @JoinColumn(name="company_id", referencedColumnName = "id"
-            , insertable = false, updatable = false)
+    @ManyToOne(fetch = FetchType.LAZY, optional = false, cascade = CascadeType.DETACH )
+    @JoinColumn(name="company_id", nullable=false)
     @LazyToOne(LazyToOneOption.NO_PROXY)
     @EqualsAndHashCode.Exclude
     @Fetch(FetchMode.JOIN)
@@ -53,6 +53,16 @@ public class ReviewSalaryEntity implements Serializable,GQLEntity {
         this.salaryRubInMonth = salaryRubInMonth;
         this.userId = userId;
         this.company = company;
+        this.isApproved =false;
+        this.id=UUID.randomUUID();
+    }
+
+    public ReviewSalaryEntity(ImportCommonReviewDto feedBack) {
+        this.position = feedBack.getPosition();
+        this.salaryRubInMonth = feedBack.getSalaryRubInMonth();
+        this.userId = UUID.fromString("94ee963b-8f4d-48ff-9b4f-feef753fd27f");
+//        SecurityConfig.getCurrentUser();todo;
+        this.company = new CompanyEntity(feedBack.getCompanyId());
         this.isApproved =false;
         this.id=UUID.randomUUID();
     }

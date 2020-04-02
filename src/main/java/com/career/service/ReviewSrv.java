@@ -3,7 +3,8 @@ package com.career.service;
 import com.career.dao.ReviewCompanyRepo;
 import com.career.dao.ReviewSalaryRepo;
 import com.career.dao.ReviewSelectionRepo;
-import com.career.dto.enumDto.*;
+import com.career.dto.ImportCommonReviewDto;
+import com.career.dto.ImportSelectionReviewDto;
 import com.career.entities.CompanyEntity;
 import com.career.entities.ReviewCompanyEntity;
 import com.career.entities.ReviewSalaryEntity;
@@ -14,7 +15,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.transaction.Transactional;
-import java.time.LocalDate;
 import java.util.List;
 import java.util.UUID;
 
@@ -32,30 +32,13 @@ public class ReviewSrv {
     @Autowired
     private CSVParser csvParser;
 
-    public void createReviewCompany(UUID companyId,
-                                    String name,
-                                    Integer commonScale,
-                                    Integer salaryScale,
-                                    Integer leadershipScale,
-                                    Integer cultureScale,
-                                    Integer careerScale,
-                                    Integer balanceWorkHomeScale,
-                                    String recommend,
-                                    String plus,
-                                    String minuses,
-                                    String status,
-                                    String position,
-                                    Integer useful,
-                                    UUID userId,
-                                    String dateWork,
-                                    String workDepartment,
-                                    String managerAdvice) {
+    public void createReviewCompany( ImportCommonReviewDto feedBack) {
 
 
-        reviewCompanyRepo.save(new ReviewCompanyEntity(name, commonScale, salaryScale, leadershipScale, cultureScale
-                , careerScale, balanceWorkHomeScale, RecommendEnum.valueOf(recommend), plus, minuses,
-                StatusEmployeeEnum.valueOf(status), position, useful, userId, DateWorkEnum.valueOf(dateWork),
-                workDepartment, managerAdvice, new CompanyEntity(companyId)));
+        reviewCompanyRepo.save(new ReviewCompanyEntity(feedBack));
+        reviewSalaryRepo.save(new ReviewSalaryEntity(feedBack));
+
+
     }
 
     public void createReviewSalary(String position,
@@ -66,37 +49,9 @@ public class ReviewSrv {
                 new CompanyEntity(companyId)));
     }
 
-    public void createReviewSelection(Boolean selectIn,
-                                      String positiveExperience,
-                                      Integer selectionProcess,
-                                      String howGetInterview,
-                                      LocalDate dateInterview,
-                                      String question,
-                                      String typeInterview,
-                                      String tests,
-                                      Integer difficult,
-                                      Integer useful,
-                                      UUID companyId,
-                                      UUID userId,
-                                      String overview,
-                                      String timeTaken,
-                                      String reviewTitle) {
+    public void createReviewSelection(ImportSelectionReviewDto feedBack) {
 
-        reviewSelectionRepo.save(new ReviewSelectionEntity(selectIn,
-                RecommendEnum.valueOf(positiveExperience),
-                selectionProcess,
-                HowToGetIntervew.valueOf(howGetInterview),
-                dateInterview,
-                question,
-                TypeOfInterviewOrTestEnum.valueOf(typeInterview),
-                TypeOfInterviewOrTestEnum.valueOf(tests),
-                difficult,
-                useful,
-                userId,
-                overview,
-                TimeTakenEnum.valueOf(timeTaken),
-                reviewTitle,
-                new CompanyEntity(companyId)));
+        reviewSelectionRepo.save(new ReviewSelectionEntity(feedBack));
     }
 
     public boolean saveCommonCsv(MultipartFile file) throws Exception {
