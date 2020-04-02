@@ -4,14 +4,37 @@ import {connect} from 'react-redux';
 import {logIn} from '@career/acs/auth';
 import styles from "./index.module.css";
 import classNames from "classnames";
-import markIkon from "@career/assets/img/system/mark-ikon.svg";
+import AboutCompanyCardSelection from "@career/components/common/AboutCompanyCardSelection";
+import {getReviewSelectionEntityListByCompany} from "@career/services/api";
+import {notifyError} from "@career/services/notifications";
 
 
 class AboutInterview extends PureComponent {
 
+    constructor(props) {
+        super(props);
+        this.state = {
+            reviews: []
+        }
+    }
+
     static getTabId() {
         return "item-review";
     }
+
+    componentDidMount() {
+        this.loadData();
+    }
+
+    loadData = () => {
+        getReviewSelectionEntityListByCompany(this.props.company.id, 20, 1)
+            .then(reviews => {
+                this.setState({
+                    reviews: reviews,
+                });
+            })
+            .catch(error => notifyError(error.message));
+    };
 
     render() {
         return (
@@ -26,7 +49,7 @@ class AboutInterview extends PureComponent {
                             <div className={styles.graphs}>
                                 <div className={styles.item}>
                                     <p className={styles.title}>Как попали на собеседование</p>
-                                    <div className={styles.graph}><img src="./img/graph1.png"/></div>
+                                    {/*<div className={styles.graph}><img src="./img/graph1.png"/></div>*/}
                                     <div className={styles.textblock}>
                                         <ul>
                                             <li className={styles.purple}>
@@ -54,7 +77,7 @@ class AboutInterview extends PureComponent {
                                 </div>
                                 <div className={styles.item}>
                                     <p className={styles.title}>Впечатления после собеседования</p>
-                                    <div className={styles.graph}><img src="./img/graph2.png"/></div>
+                                    {/*<div className={styles.graph}><img src="./img/graph2.png"/></div>*/}
                                     <div className={styles.textblock}>
                                         <ul>
                                             <li className={styles.green}>
@@ -74,8 +97,15 @@ class AboutInterview extends PureComponent {
                                 </div>
                             </div>
                         </div>
-                        <div className={styles.update}><a href="#"><img src={markIkon}/></a><span>Данные обновлены 18 февраля 2020</span>
-                        </div>
+
+                    </div>
+                    <div className={styles.reviews}>
+                        <h1>Отзывы об отборе</h1>
+                        {
+                            this.state.reviews.map(review => {
+                                return <AboutCompanyCardSelection review={review}/>;
+                            })
+                        }
                     </div>
                 </div>
             </div>

@@ -13,6 +13,7 @@ import {
     getCompanyByIdQuery,
     getAllReviewByCompanyQuery,
     getReviewSalariesByCompanyQuery,
+    getReviewSelectionEntityListByCompanyQuery,
     getTopReviewQuery
 } from '@career/constants/queries';
 
@@ -108,6 +109,20 @@ export function getReviewSalariesByCompany(companyId) {
                     throw new Error(response.errors[0]);
                 }
                 resolve(response.data.ReviewSalaryEntityList.content);
+            })
+            .catch(error => reject(error))
+    );
+}
+
+export function getReviewSelectionEntityListByCompany(companyId, size, page) {
+    return new Promise((resolve, reject) =>
+        graphql
+            .query(getReviewSelectionEntityListByCompanyQuery(companyId, size, page))
+            .then(response => {
+                if (response.errors) {
+                    throw new Error(response.errors[0]);
+                }
+                resolve(response.data.ReviewSelectionEntityList.content);
             })
             .catch(error => reject(error))
     );

@@ -4,7 +4,7 @@ import {connect} from 'react-redux';
 import {logIn} from '@career/acs/auth';
 import styles from './index.module.css';
 import breadcrambArrow from '@career/assets/img/system/breadcramb-arrow.svg';
-import AboutCompanyCard from './AboutCompanyСard'
+import AboutCompany from './AboutCompany'
 import AboutSalary from './AboutSalary'
 import AboutPhotos from './AboutPhotos'
 import AboutInterview from './AboutInterview'
@@ -21,7 +21,7 @@ class ReviewCompanies extends PureComponent {
     constructor(props) {
         super(props);
         this.state = {
-            selectedTabId: AboutCompanyCard.getTabId(),
+            selectedTabId: AboutCompany.getTabId(),
             idCompany: this.props.match.params.id,
             company: NOT_LOADED
         }
@@ -64,7 +64,7 @@ class ReviewCompanies extends PureComponent {
                     <main className={styles.company}>
                         <div className={styles.container}>
                             <div className={styles.breadcrambs}><a href={COMPANIES}><img src={breadcrambArrow}/><span>Вернуться к списку компаний</span></a>
-                                <p>В нашей базе свыше 1280 компаний</p>
+                                <p>В нашей базе свыше 5 компаний</p>
                             </div>
                             <div className={styles.content}>
                                 <div className={styles.card}>
@@ -81,18 +81,18 @@ class ReviewCompanies extends PureComponent {
                                         </div>
                                         <div className={styles.tabs} onClick={(e) => this.onClickTab(e)}>
                                             <ul>
-                                                <li className={this.classOfTab(AboutCompanyCard.getTabId())}><a href="#" id={AboutCompanyCard.getTabId()}>О
+                                                <li className={this.classOfTab(AboutCompany.getTabId())}><a href="#" id={AboutCompany.getTabId()}>О
                                                     компании <span>({this.state.company.countCompanyReview})</span></a></li>
                                                 <li className={this.classOfTab(AboutSalary.getTabId())}><a href="#" id={AboutSalary.getTabId()}>О зарплате <span>({this.state.company.countSalaryReview})</span></a>
                                                 </li>
                                                 <li className={this.classOfTab(AboutInterview.getTabId())}><a href="#" id={AboutInterview.getTabId()}>Об
                                                     отборе <span>({this.state.company.countSelectionReview})</span></a></li>
-                                                <li className={this.classOfTab(AboutPhotos.getTabId())}><a href="#" id={AboutPhotos.getTabId()}>Фото</a></li>
+                                                {/*<li className={this.classOfTab(AboutPhotos.getTabId())}><a href="#" id={AboutPhotos.getTabId()}>Фото</a></li>*/}
                                             </ul>
                                         </div>
                                     </div>
                                 </div>
-                                {<AboutCompanyCard selectedTabId = {this.state.selectedTabId} company={this.state.company}/>}
+                                {<AboutCompany selectedTabId = {this.state.selectedTabId} company={this.state.company}/>}
                                 {<AboutSalary selectedTabId = {this.state.selectedTabId}  company={this.state.company}/>}
                                 {<AboutInterview selectedTabId = {this.state.selectedTabId}  company={this.state.company}/>}
                                 {<AboutPhotos selectedTabId = {this.state.selectedTabId}/>}

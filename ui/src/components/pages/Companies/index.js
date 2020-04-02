@@ -100,8 +100,8 @@ class Companies extends PureComponent {
                     <div className={styles.content}>
                         <h1>Все компании</h1>
                         <div className={styles.sort}>
-                            <p>Больше 5000 отзывов от пользователей в нашей базе.</p><a
-                            href="#"><span>Сортировать</span> <img src={sortIkon}/></a>
+                            <p>Больше 500 отзывов от пользователей в нашей базе.</p><a
+                            href="#"/>
                         </div>
                         <div className={styles.allCompaniesContainer}>
                             {

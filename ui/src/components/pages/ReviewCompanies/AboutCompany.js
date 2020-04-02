@@ -6,17 +6,36 @@ import styles from "./index.module.css";
 import classNames from "classnames";
 import cityIkon from "@career/assets/img/system/city-ikon.svg";
 import markIkon from "@career/assets/img/system/mark-ikon.svg";
-import AboutCompanyReview from './AboutCompanyReview'
+import AboutCompanyCardReview from "@career/components/common/AboutCompanyCardReview";
+import {getAllReviewByCompany} from "@career/services/api";
+import {notifyError} from "@career/services/notifications";
 
 
-class AboutCompanyCard extends PureComponent {
+class AboutCompany extends PureComponent {
     constructor(props) {
         super(props);
+        this.state = {
+            reviews: []
+        }
     }
 
     static getTabId() {
         return "item-company";
     }
+
+    componentDidMount() {
+        this.loadData();
+    }
+
+    loadData = () => {
+        getAllReviewByCompany(this.props.company.id, 20, 1)
+            .then(reviews => {
+                this.setState({
+                    reviews: reviews,
+                });
+            })
+            .catch(error => notifyError(error.message));
+    };
 
     calcWidth(rating) {
         return (rating / 5 * 100) + "%";
@@ -25,7 +44,7 @@ class AboutCompanyCard extends PureComponent {
     render() {
         const width = {width: 50 };
         return (
-            <div hidden={this.props.selectedTabId !== AboutCompanyCard.getTabId()}>
+            <div hidden={this.props.selectedTabId !== AboutCompany.getTabId()}>
                 <div className={styles.cardContainer}>
                     <div className={classNames(styles.cardContent, styles.about, styles.active)}>
                         <div className={styles.cardContentHeader}>
@@ -74,33 +93,37 @@ class AboutCompanyCard extends PureComponent {
                                 </div>
                                 <div className={classNames(styles.item, styles.career)}>
                                     <div className={styles.line}>
-                                        <div  style={{width: this.calcWidth(this.props.company.averageCareerScale)}}></div>
+                                        <div  style={{width: this.calcWidth(this.props.company.averageCareerScale)}}/>
                                     </div>
                                     <span>{Number((this.props.company.averageCareerScale).toFixed(1))}</span>
                                     <p>Карьерные возможности</p>
                                 </div>
                                 <div className={classNames(styles.item, styles.culture)}>
                                     <div className={styles.line}>
-                                        <div  style={{width: this.calcWidth(this.props.company.averageCultureScale)}}></div>
+                                        <div  style={{width: this.calcWidth(this.props.company.averageCultureScale)}}/>
                                     </div>
                                     <span>{Number((this.props.company.averageCultureScale).toFixed(1))}</span>
                                     <p>Культуры и ценности</p>
                                 </div>
                                 <div className={classNames(styles.item, styles.balance)}>
                                     <div className={styles.line}>
-                                        <div  style={{width: this.calcWidth(this.props.company.averageBalanceScale)}}></div>
+                                        <div  style={{width: this.calcWidth(this.props.company.averageBalanceScale)}}/>
                                     </div>
                                     <span>{Number((this.props.company.averageBalanceScale).toFixed(1))}</span>
                                     <p>Баланс работы и жизни</p>
                                 </div>
                             </div>
-                            <div className={styles.update}><a href="#"><img
-                                src={markIkon}/></a><span>Данные обновлены 18 февраля 2020</span>
-                            </div>
                         </div>
                     </div>
                 </div>
-                {<AboutCompanyReview idCompany={this.props.company.id}/>}
+                <div className={styles.reviews}>
+                    <h1>Отзывы о компании</h1>
+                    {
+                        this.state.reviews.map(review => {
+                            return <AboutCompanyCardReview review={review}/>;
+                        })
+                    }
+                </div>
             </div>
         );
     }
@@ -114,4 +137,4 @@ const mapDispatchToProps = {
 export default connect(
     null,
     mapDispatchToProps
-)(withRouter(AboutCompanyCard));
+)(withRouter(AboutCompany));

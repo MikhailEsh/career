@@ -9,9 +9,9 @@ import plus from "@career/assets/img/system/plus.svg";
 import Rating from "@career/components/common/Rating";
 import {getTopReview, getAllCompanies} from '@career/services/api';
 import {notifyError} from '@career/services/notifications';
-import cityIkon from "@career/assets/img/system/city-ikon.svg";
-import Moment from 'react-moment';
 import 'moment/locale/ru'
+import AboutCompanyCardReview from "@career/components/common/AboutCompanyCardReview";
+import {COMPANIES} from '@career/constants/routes';
 
 
 class Home extends PureComponent {
@@ -61,9 +61,9 @@ class Home extends PureComponent {
                     </p>
                 </div>
                 <div className={styles.employerReviews}>
-                    <p>Отзывы: <span>О компании<a href="#">{company.countCompanyReview}</a></span><span>О зарплате<a
-                        href="#">{company.countSalaryReview}</a></span><span>Об отборе<a
-                        href="#">{company.countSelectionReview}</a></span></p>
+                    <p>Отзывы: <span>О компании<a>{company.countCompanyReview}</a></span><span>О зарплате<a
+                       >{company.countSalaryReview}</a></span><span>Об отборе<a
+                        >{company.countSelectionReview}</a></span></p>
                 </div>
             </div>
             <Rating rating={company.averageCommonScale}/>
@@ -77,39 +77,10 @@ class Home extends PureComponent {
         } else return minus
     }
 
-    renderReviewItem(review) {
-        return <div className={styles.item}>
-            <div className={styles.reviewHeader}>
-                <div className={styles.reviewCompany}>
-                    <div className={styles.logo}><img src="/assets/img/companyIcon/sber-ikon.svg"/></div>
-                    <div className={styles.company}>
-                        <p>{review.company.name}</p>
-                        <Rating rating={review.commonScale}/>
-                    </div>
-                </div>
-                <div className="date"><Moment format="LL" locale="ru" date={review.timeAdded}/></div>
-            </div>
-            <div className={styles.reviewContent}>
-                <p className={styles.title}>{review.name}</p>
-                <br/>
-                <p className={styles.title}>Плюсы:</p>
-                <p className={styles.text}>{review.plus}</p>
-                <br/>
-                <p className={styles.title}>Минусы:</p>
-                <p className={styles.text}>{review.minuses}</p>
-            </div>
-            <div className={styles.reviewFooter}>
-                <div className={styles.advantages}>
-                    <div className={styles.itemAdvantage}><img
-                        src={this.calcPlusMinus(review.salaryScale)}/><span>Зарплата</span></div>
-                    <div className={styles.itemAdvantage}><img
-                        src={this.calcPlusMinus(review.leadershipScale)}/><span>Руководство</span></div>
-                    <div className={styles.itemAdvantage}><img
-                        src={this.calcPlusMinus(review.careerScale)}/><span>Карьера</span></div>
-                </div>
-                <div className={styles.city}><img src={cityIkon}/><span>Москва</span></div>
-            </div>
-        </div>
+    openAllCompany(ev) {
+        ev.preventDefault();
+        const {history} = this.props;
+        history.push(COMPANIES);
     }
 
     render() {
@@ -126,11 +97,6 @@ class Home extends PureComponent {
                             прежде чем идти на собеседование.</p>
                         <form>
                             <input type="text" name="company" placeholder="Название компании..."/>
-                            <select>
-                                <option value="prof1" disabled="disabled">Выбрать профессию</option>
-                                <option value="prof2">Профессия</option>
-                                <option value="prof3">Профессия</option>
-                            </select>
                             <input className={classNames(styles.btn, styles.btnGreen)} type="submit"
                                    value="Найти отзыв"/>
                         </form>
@@ -150,7 +116,10 @@ class Home extends PureComponent {
                                     return this.renderCompanyItem(company);
                                 })}
                             </div>
-                            <button className={styles.btn}>Все работодатели</button>
+                            <button
+                                className={styles.btn}
+                                onClick={(e) => this.openAllCompany(e)}
+                            >Все работодатели</button>
                         </div>
                     </section>
                     <section className={styles.lastReviews}>
@@ -159,7 +128,7 @@ class Home extends PureComponent {
                             <div className={styles.lastReviewsContainer}>
                                 {
                                     this.state.topReviews.map(review => {
-                                        return this.renderReviewItem(review);
+                                        return <AboutCompanyCardReview review={review}/>;
                                     })
                                 }
                             </div>

@@ -6,13 +6,10 @@ import styles from './index.module.css';
 import classNames from "classnames";
 import starGreen from "@career/assets/img/system/star-green.svg";
 import starGrey from "@career/assets/img/system/star-grey.svg";
+import {STATUS} from "@career/constants/system";
 import StarRatingComponent from 'react-star-rating-component';
 
 
-const STATUS = {
-    WORK_NOW: "WORK_NOW",
-    WORKED: "WORKED",
-};
 
 
 const commonScale = "commonScale";

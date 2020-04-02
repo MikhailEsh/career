@@ -5,11 +5,6 @@ import {logOut } from '@career/acs/auth';
 import logo from '@career/assets/img/system/logo.svg';
 import logo2 from '@career/assets/img/system/logo2.svg';
 import styles from './index.module.css';
-import {
-    HOME,
-    COMPANIES,
-    LEAVEFEEDBACK
-} from '@career/constants/routes';
 import {withRouter} from "react-router-dom";
 
 class Header extends PureComponent {
@@ -66,7 +61,7 @@ class Header extends PureComponent {
                                     name="companies"
                                     onClick={(e) => this.openPage(e)}
                                 >Все компании</a></li>
-                                <li className={this.getClassName("employers")}><a href="#">Работодателям</a></li>
+                                {/*<li className={this.getClassName("employers")}><a href="#">Работодателям</a></li>*/}
                             </ul>
                         </nav>
                         <div className={styles.account}><a href="#"><img src="./img/user-ikon.svg"/><span>Личный кабинет</span></a>

@@ -507,7 +507,7 @@ main.company .login {
         top: 10px; } }
 
 .cardContainer {
-    margin-top: 15px; }
+    margin-top: 30px; }
 
 .cardContent {
     display: none; }
@@ -665,107 +665,6 @@ main.company .login {
 @media (min-width: 768px) {
     .city {
         margin-top: 0; } }
-
-.reviews {
-    margin-top: 24px; }
-.reviews h1 {
-    padding: 0 16px; }
-
-@media (min-width: 768px) {
-    .reviews h1 {
-        display: none; } }
-
-.reviewsContainer {
-    margin-top: 24px; }
-.reviewsContainer > a {
-    display: block;
-    margin: 24px auto 0;
-    text-align: center;
-    font-size: .875em;
-    color: #0066CC;
-    font-weight: 500;
-    text-decoration: underline; }
-.reviewsContainer .item {
-    background: white;
-    padding: 16px 16px 40px;
-    display: grid;
-    grid-template-areas: 'who date'
-    'title title'
-    'text text'
-    'advantages advantages'
-    'btn rating';
-    margin-bottom: 16px; }
-.reviewsContainer .item:last-child {
-    margin-bottom: 0; }
-.reviewsContainer .who {
-    grid-area: who; }
-.reviewsContainer .who span {
-    font-size: .75em;
-    background: rgba(247, 223, 10, 0.2);
-    border-radius: 4px;
-    padding: 2px 8px;
-    color: rgba(0, 0, 0, 0.6); }
-.reviewsContainer .date {
-    grid-area: date;
-    font-size: .75em;
-    color: rgba(0, 0, 0, 0.3);
-    text-align: right; }
-.reviewsContainer .title {
-    grid-area: title;
-    font-weight: bold;
-    font-size: 1.125em;
-    margin-top: 17px; }
-.reviewsContainer .text {
-    grid-area: text;
-    font-size: .875em;
-    margin-top: 8px; }
-.reviewsContainer .advantages {
-    grid-area: advantages;
-    margin-top: 40px; }
-.reviewsContainer .more {
-    grid-area: btn;
-    margin-top: 24px; }
-.reviewsContainer .more button {
-    height: 40px; }
-.reviewsContainer .rating {
-    grid-area: rating;
-    justify-content: flex-end;
-    margin-top: 35px; }
-
-@media (min-width: 768px) {
-    .reviewsContainer > a {
-        display: none; } }
-
-@media (min-width: 1024px) {
-    .reviewsContainer .item {
-        grid-template-areas: 'who date'
-        'title title'
-        'text text'
-        'rating rating'
-        'btn advantages';
-        padding: 26px 24px; }
-    .reviewsContainer .rating {
-        justify-content: flex-start; }
-    .reviewsContainer .more button {
-        width: 152px; }
-    .reviewsContainer .advantages {
-        margin-top: 20px; } }
-
-.itemAdvantage {
-    display: flex;
-    align-items: center;
-    flex-wrap: wrap; }
-.itemAdvantage span {
-    margin-left: 5px;
-    font-size: .875em; }
-
-@media (min-width: 768px) {
-    .itemAdvantage {
-        margin-right: 12px; } }
-
-.advantages {
-    display: flex;
-    justify-content: space-between; }
 
 .salaries .item {
     display: flex;

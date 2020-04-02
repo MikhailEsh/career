@@ -113,6 +113,38 @@ export const getReviewSalariesByCompanyQuery = companyId => ({
   fetchPolicy: 'no-cache',
 });
 
+export const getReviewSelectionEntityListByCompanyQuery = (companyId, size, page) => ({
+  query: gql`
+    query {
+        ReviewSelectionEntityList(paginator:{
+        size:${size},page:${page}
+        }, qfilter: {operator: equals, key: "company.id", value: "${companyId}"}) {
+           totalPages
+          totalElements
+          content {
+            useful
+            timeAdded
+            overview
+            isApproved
+            tests
+            selectionProcess
+            howGetInterview
+            id
+            difficult
+            selectIn
+            userId
+            dateInterview
+            positiveExperience
+            questions
+            reviewTitle
+            timeTaken
+            typeOfInterview
+    } 
+    }
+    }
+  `,
+  fetchPolicy: 'no-cache',
+});
 
 export const getTopReviewQuery = (size, page) => ({
   query: gql`
