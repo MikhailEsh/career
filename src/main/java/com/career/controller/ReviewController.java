@@ -2,6 +2,7 @@ package com.career.controller;
 
 import com.career.dto.ImportCommonReviewDto;
 import com.career.dto.ImportSelectionReviewDto;
+import com.career.dto.SalaryDto;
 import com.career.service.CompanySrv;
 import com.career.service.ReviewSrv;
 import com.career.service.SalarySrv;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
@@ -54,7 +56,7 @@ public class ReviewController {
     }
 
     @JsonGetMapping("/aggregation-salary-by-id")
-    public Map<String, Double> aggregationSalary(@RequestParam("companyId") UUID id) {
+    public List<SalaryDto> aggregationSalary(@RequestParam("companyId") UUID id) {
         return salarySrv.findAllAggregationSalaryByCompany(id);
     }
 }
