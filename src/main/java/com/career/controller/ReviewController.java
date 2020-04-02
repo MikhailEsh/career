@@ -1,16 +1,18 @@
 package com.career.controller;
 
+import com.career.dto.ImportCommonReviewDto;
+import com.career.dto.ImportSelectionReviewDto;
 import com.career.service.CompanySrv;
 import com.career.service.ReviewSrv;
 import com.career.service.SalarySrv;
 import com.career.utils.JsonGetMapping;
 import com.career.utils.JsonPostMapping;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.time.LocalDate;
 import java.util.Map;
 import java.util.UUID;
 
@@ -26,88 +28,14 @@ public class ReviewController {
     private SalarySrv salarySrv;
 
     @JsonPostMapping(value = "/common")
-    public void getEnterpriseSummary(
-            @RequestParam("company_id") UUID companyId,
-            @RequestParam("name") String name,
-            @RequestParam("commonScale") Integer commonScale,
-            @RequestParam("salaryScale") Integer salaryScale,
-            @RequestParam("leadershipScale") Integer leadershipScale,
-            @RequestParam("cultureScale") Integer cultureScale,
-            @RequestParam("careerScale") Integer careerScale,
-            @RequestParam("balanceWorkHomeScale") Integer balanceWorkHomeScale,
-            @RequestParam("recommend") String recommend,
-            @RequestParam("plus") String plus,
-            @RequestParam("minuses") String minuses,
-            @RequestParam("status") String status,
-            @RequestParam("position") String position,
-            @RequestParam("useful") Integer useful,
-            @RequestParam("user_id") UUID userId,
-            @RequestParam("dateWork") String dateWork,
-            @RequestParam("workDepartment") String workDepartment,
-            @RequestParam("managementAdvice") String managementAdvice
-
-            ) {
-       reviewSrv.createReviewCompany(companyId,
-               name,
-               commonScale,
-               salaryScale,
-               leadershipScale,
-               cultureScale,
-               careerScale,
-               balanceWorkHomeScale,
-               recommend,
-               plus,
-               minuses,
-               status,
-               position,
-               useful,
-               userId,
-               dateWork,
-               workDepartment,
-               managementAdvice);
+    public void getEnterpriseSummary(@RequestBody ImportCommonReviewDto feedBack) {
+       reviewSrv.createReviewCompany(feedBack);
     }
 
-    @JsonPostMapping(value = "/salary")
-    public void getEnterpriseSummary(@RequestParam("position") String position,
-                                        @RequestParam("salaryrubinmonth") Integer salaryRubInMonth,
-                                        @RequestParam("company_id") UUID companyId ,
-                                        @RequestParam("user_id") UUID userId) {
-        reviewSrv.createReviewSalary(position,salaryRubInMonth,companyId,userId);
-    }
 
     @JsonPostMapping(value = "/selection")
-    public void getEnterpriseSummary(@RequestParam("select_in") Boolean selectIn,
-                                        @RequestParam("positive_experience") String positiveExperience,
-                                        @RequestParam("selection_process") Integer selectionProcess,
-                                        @RequestParam("how_get_interview") String howGetInterview,
-                                        @RequestParam("date_interview") LocalDate dateInterview,
-                                        @RequestParam("question") String question,
-                                        @RequestParam("type_interview") String typeInterview,
-                                        @RequestParam("tests") String tests,
-                                        @RequestParam("difficult") Integer difficult,
-                                        @RequestParam("useful")  Integer useful,
-                                        @RequestParam("company_id") UUID companyId,
-                                        @RequestParam("user_id") UUID userId,
-                                        @RequestParam("overview") String  overview,
-                                        @RequestParam("time_taken") String  timeTaken,
-                                        @RequestParam("review_title") String reviewTitle
-
-                                        ) {
-        reviewSrv.createReviewSelection(selectIn,
-                positiveExperience,
-                selectionProcess,
-                howGetInterview,
-                dateInterview,
-                question,
-                typeInterview,
-                tests,
-                difficult,
-                useful,
-                companyId,
-                userId,
-                overview,
-                timeTaken,
-                reviewTitle);
+    public void getEnterpriseSummary(@RequestBody ImportSelectionReviewDto feedBack) {
+        reviewSrv.createReviewSelection(feedBack);
     }
 
     @JsonPostMapping("/update-count-by-id")

@@ -1,5 +1,6 @@
 package com.career.entities;
 
+import com.career.dto.ImportCommonReviewDto;
 import com.career.dto.enumDto.DateWorkEnum;
 import com.career.dto.enumDto.RecommendEnum;
 import com.career.dto.enumDto.StatusEmployeeEnum;
@@ -79,6 +80,9 @@ public class ReviewCompanyEntity implements GQLEntity {
     @Fetch(FetchMode.JOIN)
     private CompanyEntity company;
 
+
+
+
     public ReviewCompanyEntity(String name,
                                Integer commonScale,
                                Integer salaryScale,
@@ -116,6 +120,31 @@ public class ReviewCompanyEntity implements GQLEntity {
         this.workDepartment = workDepartment;
         this.managementAdvice = managementAdvice;
         this.company = company;
+        this.timeAdded= LocalDateTime.now();
+        this.isApproved=false;
+    }
+
+    public ReviewCompanyEntity(ImportCommonReviewDto feedBack) {
+        this.id=UUID.randomUUID();
+        this.name = feedBack.getTitle();
+        this.commonScale = feedBack.getCommonScale();
+        this.salaryScale = feedBack.getSalaryScale();
+        this.leadershipScale = feedBack.getLeadershipScale();
+        this.cultureScale = feedBack.getCultureScale();
+        this.careerScale = feedBack.getCareerScale();
+        this.balanceWorkHomeScale = feedBack.getBalanceWorkHomeScale();
+        this.recommend =RecommendEnum.NEUTRAL;
+        this.plus = feedBack.getPlus();
+        this.minuses = feedBack.getMinuses();
+        this.status = StatusEmployeeEnum.valueOf(feedBack.getStatus());
+        this.position = feedBack.getPosition();
+        this.useful = feedBack.getUseful();
+        this.userId =UUID.fromString("94ee963b-8f4d-48ff-9b4f-feef753fd27f");
+//        SecurityConfig.getCurrentUser();todo
+        this.dateWork = DateWorkEnum.valueOf(feedBack.getDateWork());
+        this.workDepartment = feedBack.getWorkDepartment();
+        this.managementAdvice = feedBack.getManagementAdvice();
+        this.company = new CompanyEntity(feedBack.getCompanyId());
         this.timeAdded= LocalDateTime.now();
         this.isApproved=false;
     }
