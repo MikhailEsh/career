@@ -11,7 +11,7 @@ import {getTopReview, getAllCompanies} from '@career/services/api';
 import {notifyError} from '@career/services/notifications';
 import 'moment/locale/ru'
 import AboutCompanyCardReview from "@career/components/common/AboutCompanyCardReview";
-import {COMPANIES} from '@career/constants/routes';
+import {COMPANIES, LEAVEFEEDBACK} from '@career/constants/routes';
 
 
 class Home extends PureComponent {
@@ -77,10 +77,10 @@ class Home extends PureComponent {
         } else return minus
     }
 
-    openAllCompany(ev) {
+    openPage(ev, url) {
         ev.preventDefault();
         const {history} = this.props;
-        history.push(COMPANIES);
+        history.push(url);
     }
 
     render() {
@@ -118,7 +118,7 @@ class Home extends PureComponent {
                             </div>
                             <button
                                 className={styles.btn}
-                                onClick={(e) => this.openAllCompany(e)}
+                                onClick={(e) => this.openPage(e, COMPANIES)}
                             >Все работодатели</button>
                         </div>
                     </section>
@@ -133,7 +133,9 @@ class Home extends PureComponent {
                                 }
                             </div>
                             <div className={styles.btn}>
-                                <button className={classNames(styles.btn, styles.btnGreen)}>Оставить отзыв</button>
+                                <button className={classNames(styles.btn, styles.btnGreen)}
+                                        onClick={(e) => this.openPage(e, LEAVEFEEDBACK)}
+                                >Оставить отзыв</button>
                                 <button className={classNames(styles.btn, styles.btnWrite)}>Читать все отзывы</button>
                             </div>
                         </div>

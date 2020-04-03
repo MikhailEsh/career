@@ -1,33 +1,56 @@
-.root {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  background: #121212;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+.block404 {
+  padding: 32px 0 50px;
+  height: 100%; }
 
-  .bg {
-    background: url('./404.gif');
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    background-size: cover;
-    mix-blend-mode: overlay;
-  }
-
-  .text {
-    color: white;
-    width: 100%;
+@media (min-width: 768px) {
+  .block404 {
+    background: white; }
+  .block404 .container {
     display: flex;
-    flex-direction: column;
-    backgorund-position: center;
     align-items: center;
-    background-size: cover;
     justify-content: center;
-  }
-}
+    flex-direction: row-reverse; } }
+
+@media (min-width: 768px) {
+  .block404 {
+    padding: 120px 0; } }
+
+.block404Img {
+  padding: 0 50px; }
+.block404Img img {
+  max-width: 100%; }
+
+@media (min-width: 768px) {
+  .block404Img {
+    padding: 0;
+    margin-left: 54px; } }
+
+@media (min-width: 768px) {
+  .block404Img {
+    flex: 0 0 555px; } }
+
+.block404Text {
+  margin-top: 50px; }
+.block404Text .title {
+  font-weight: bold;
+  font-size: 2em; }
+.block404Text .text {
+  margin-top: 16px;
+  font-size: .875em; }
+.block404Text button {
+  margin-top: 32px; }
+
+@media (min-width: 768px) {
+  .block404Text {
+    margin-top: 0; }
+  .block404Text button {
+    width: 240px; } }
+
+.btn {
+  height: 48px;
+  width: 100%;
+  font-size: .875em;
+  transition: all .3s; }
+
+.btn-green {
+  background-color: #01DB55; }
